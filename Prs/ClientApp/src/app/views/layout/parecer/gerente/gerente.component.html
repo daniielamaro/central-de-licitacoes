@@ -1,0 +1,186 @@
+<div class="container-fluid pb-5">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="nameComponent">
+            <h3 *ngIf="!atualizar" class="">Cadastrar</h3>
+            <h3 *ngIf="atualizar" class="">Atualizar</h3>
+            <h3>Parecer Gerente de Contas</h3>
+         </div>
+         <form class="d-flex justify-content-center align-items-center flex-column" [formGroup]="parecerGerenteContasForm">
+            <div class="card my-1 py-3">
+               <legend>Informações Gerais</legend>
+               <hr />
+               <div class="d-flex justify-content-center" *ngIf="!edital">
+                  <div class="spinner-border text-primary" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+               <div class="form-row d-flex justify-content-between" *ngIf="edital != null">
+                  <div class="form-group col-md-1 d-flex flex-column ">
+                     <label class="active">ID Edital</label>
+                     <p class="conteudo bg-info text-white">{{ edital.id }}</p>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Número do Edital</label>
+                     <span class="conteudo bg-info text-white">{{ edital.numEdital }}</span>
+                  </div>
+                  <div class="form-group col-md-4 d-flex flex-column">
+                     <label class="active">Cliente</label>
+                     <span class="conteudo bg-info text-white">{{ edital.cliente.nome }}</span>
+                  </div>
+                  <div class="form-group col-md-3 d-flex flex-column">
+                     <label class="active">Data de Abertura do Edital</label>
+                     <span class="conteudo bg-info text-white">{{ edital.dataHoraDeAbertura | date: 'dd/MM/yyyy HH:mm' }}</span>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Valor Estimado</label>
+                     <span class="conteudo bg-info text-white">{{edital.valorEstimado | currency : 'R$'}}</span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="d-flex justify-content-center gropoCard">
+               <div class="card my-1 py-3 meioCard" style="display: block;">
+                  <legend>Parecer Gerente de Contas</legend>
+                  <hr />
+                  <div class="form-group col-md-3 ml-2">
+                     <label class="active">Parecer</label>
+                     <select class="form-control px-2" formControlName="parecer" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option (click)="setParecer(true)" value="Favoravel">Favoravel</option>
+                        <option (click)="setParecer(false)" value="Não favoravel">Não favoravel</option>
+                     </select>
+                  </div>
+                  <div *ngIf="dadosForm" class="form-group col-md-10 px-2 mt-3"
+                     [hidden]="parecerGerenteContasForm.get('parecer').value != 'Não favoravel'">
+                     <label class="active">Motivo</label>
+                     <select formControlName="motivo" class="form-control px-2" [required]="parecerGerenteContasForm.get('parecer').value == 'Não favoravel'">
+                        <option value="" [selected]="parecerGerenteContasForm.get('parecer').value == 'Favoravel'">--Selecione--</option>
+                        <option *ngFor="let motivo of dadosForm.motivos" value="{{ motivo.id }}">{{ motivo.nome }}
+                        </option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-10 px-2 mt-3">
+                     <label class="active" for="observacao">Observação</label>
+                     <textarea class="form-control px-2" formControlName="observacao" rows="3"></textarea>
+                  </div>
+               </div>
+
+               <div class="card my-1 py-3 meioCard">
+                  <legend>Natureza</legend>
+                  <hr />
+                  <div class="form-group col-md-3 ml-2">
+                     <div class="form-check radio">
+                        <input class="" type="radio" (click)="setNatureza(true)" formControlName="natureza" value="Oportunidade" name="natureza"
+                           [checked]="true">
+                        <span class="ml-2">Oportunidade</span>
+                     </div>
+                     <div class="form-check radio">
+                        <input formControlName="natureza" (click)="setNatureza(false)" type="radio" name="natureza" value="Trabalho">
+                        <span class="ml-2">Trabalho</span>
+                     </div>
+                  </div>
+                  <div class="form-group col-md-4 px-2 mt-3"
+                     [hidden]="parecerGerenteContasForm.get('natureza').value != 'Trabalho'">
+                     <label class="active" for="codigoCrm">Código CRM</label>
+                     <input type="number" formControlName="codCrm" class="form-control px-2" [required]="parecerGerenteContasForm.get('natureza').value == 'Trabalho'">
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Indicador Comercial</legend>
+               <hr />
+               <div class="form-row d-flex justify-content-around" *ngIf="dadosForm">
+                  <div class="form-group col-md-5 d-flex flex-column">
+                     <label class="active">Indicadores Comercial</label>
+                     <select formControlName="empresa" class="form-control px-2" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let empresa of dadosForm.empresas" value="{{ empresa.id }}">{{ empresa.nome }}
+                        </option>
+                     </select>
+                  </div>
+                  <div *ngIf="dadosForm" class="form-group col-md-5 d-flex flex-column">
+                     <label class="active">Pré-Venda</label>
+                     <select formControlName="preVenda" class="form-control px-2" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let preVenda of dadosForm.preVendas" value="{{ preVenda.id }}">
+                           {{ preVenda.usuario.nome }}</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Anexos Gerente de Contas</legend>
+               <hr />
+               <div class="form-row d-flex justify-content-around">
+
+                  <div class="form-group col-md-6 d-flex justify-content-center align-items-center flex-column">
+                     <label class="active">Anexo 1</label>
+                     <div class="form-group pt-5" *ngIf="!arquivo1">
+                        <app-upload [tituloBt]="'Upload'" [idBt]="'anexo1bt'" (evento)="upload($event, 1)"></app-upload>
+                     </div>
+                     <div class="form-group col-md-12 pt-3 d-flex justify-content-center" *ngIf="arquivo1">
+                        <div class="btn-group" role="group" aria-label="...">
+                           <a class="btn btn-info btnAnexo" (click)="downloadAnexo(1)"
+                              href="javascript:void(0);">{{ arquivo1.nome }}</a>
+                           <button type="button" class="btn btn-danger btnExcluir" href="javascript:void(0);"
+                              (click)="excluirAnexo(1)">
+                              X
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="form-group col-md-6 d-flex flex-column justify-content-center align-items-center">
+                     <label class="active">Anexo 2</label>
+                     <div class="form-group pt-5" *ngIf="!arquivo2">
+                        <app-upload [tituloBt]="'Upload'" [idBt]="'anexo2bt'" (evento)="upload($event, 2)"></app-upload>
+                     </div>
+                     <div class="form-group col-md-12 pt-3 d-flex justify-content-center" *ngIf="arquivo2">
+                        <div class="btn-group" role="group" aria-label="...">
+                           <a class="btn btn-info btnAnexo" (click)="downloadAnexo(2)"
+                              href="javascript:void(0);">{{ arquivo2.nome }}</a>
+                           <button type="button" class="btn btn-danger btnExcluir" href="javascript:void(0);"
+                              (click)="excluirAnexo(2)">
+                              X
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Anexo do Edital</legend>
+               <hr />
+               <div class="d-flex justify-content-center" *ngIf="!edital">
+                  <div class="spinner-border text-primary" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+               <div class="form-group col-md-12 d-flex justify-content-center" *ngIf="edital">
+                  <div class="form-group" *ngIf="edital.anexo">
+                     <div class="btn-group" role="group" aria-label="...">
+                        <a class="btn btn-info btnAnexo" (click)="downloadAnexo(0)"
+                           href="javascript:void(0);">{{ edital.anexo.nome }}</a>
+                     </div>
+                  </div>
+                  <div class="form-group" *ngIf="!edital.anexo">
+                     <div class="btn-group" role="group" aria-label="...">
+                        Este anexo não está disponível, por favor entre em contato com os administradores.
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <a href="" id="download-anexo" download=""></a>
+            <div class="card my-1 py-3 px-3">
+               <div class="form-group col-md-12">
+                  <button type="submit" (click)="processar()" [disabled]="!parecerGerenteContasForm.valid" class="btn btn-success btn-lg btnSubmit" type="submit">Salvar</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,140 @@
+* {
+   padding: 0;
+   margin: 0;
+   font-family: "Ubuntu", sans-serif;
+}
+
+.nameComponent {
+   border: 1px solid rgb(207, 207, 207);
+   border-radius: 5px;
+   width: 250px;
+   padding: 5px;
+   text-align: center;
+   box-shadow: 0 8px 6px -6px black;
+   margin-bottom: 15px;
+   color: rgb(3, 76, 192);
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.card {
+   width: 80vw;
+   box-shadow: 0 1px 8px -1px black;
+}
+
+.card-end{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.card-end .card {
+   width: 39.6vw;
+   margin: 0px 4px;
+}
+
+legend {
+   width: 300px;
+   padding: 0px 10px;
+   color: rgb(3, 76, 192);
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+}
+
+legend hr {
+   width: 100%;
+   border: 1px solid rgb(0, 5, 75);
+   margin-bottom: 20px;
+}
+
+.form-row {
+   padding: 10px 12px;
+}
+
+.btnSubmit {
+   font-size: 18pt;
+   border: none;
+   border-radius: 5px;
+   margin-right: 20px;
+   padding: 5px 10px;
+}
+
+.btnAutorizar {
+   font-size: 12pt;
+   border: none;
+   border-radius: 5px;
+   margin-right: 20px;
+   padding: 5px 10px;
+}
+
+.solicitacao {
+   border: 1px solid rgb(197, 197, 197);
+   border-radius: 5px;
+   margin: 10px;
+   padding: 6px 4px;
+   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.botao {
+   font-size: 14pt;
+   border: none;
+   border-radius: 5px;
+   padding: 5px 10px;
+}
+
+.btnExcluir {
+   width: 40px;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+   border-left: 5px solid #42a948;
+}
+
+.ng-invalid:not(form) {
+   border-left: 5px solid #a94442;
+}
+
+.ng-invalid[_ngcontent-c1]:not(form) {
+   border-left: 5px solid #f26522;
+}
+.layers.bd.bgc-white.p-20 {
+   border: 1px solid rgb(156, 191, 71) !important;
+}
+
+.my-drop-zone {
+   border: dotted 3px lightgray;
+}
+
+.nv-file-over {
+   border: dotted 3px red;
+}
+
+.another-file-over-class {
+   border: dotted 3px green;
+}
+
+.plus-edital {
+   cursor: pointer;
+}
+
+.carregar {
+   margin-left: 25%;
+}
+
+.tituloSetorSolicitacao {
+   margin-right: 10px;
+   border-bottom: 2px solid rgb(103, 79, 255);
+   margin-bottom: 4px;
+}
+
+.descricaoSetorSolicitacao {
+   /* background-color: rgb(138, 120, 253); */
+   border-top: 1px solid rgb(194, 186, 248);
+   border-bottom: 1px solid rgb(194, 186, 248);
+   padding: 4px;
+   color: rgb(10, 10, 10);
+}

@@ -1,0 +1,352 @@
+<div class="container-fluid pb-5">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="nameComponent">
+            <h3>Relatorio</h3>
+         </div>
+         <form *ngIf="dadosForm" class="d-flex justify-content-center align-items-center flex-column" [formGroup]="relatorio">
+            <div class="card my-1 py-3">
+               <legend data-toggle="collapse" data-target="#edital" aria-expanded="false" aria-controls="edital" (click)="toogleCard(1)"><span>Edital</span><img [src]="toogleSetaEdital" class="seta"/></legend>
+               <hr />
+               <div class="collapse blockForm mx-2 pb-1" id="edital">
+                  <div class="form-row d-flex justify-content-between">
+                     <div class="form-group col-md-2">
+                        <label class="active">Número do Edital</label>
+                        <input type="text" formControlName="numEdital" name="numEdital" class="form-control px-2">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-4">
+                        <label class="active">Clientes</label>
+                        <select formControlName="cliente" class="form-control px-2" name="cliente">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let cliente of dadosForm.clientes" value="{{ cliente.id }}">{{ cliente.apelido }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Data Abertura Inicio</label>
+                        <input formControlName="dataAberturaInicio" class="form-control px-2"
+                           placeholder="Selecione a data" type="date" name="dataAberturaEdital">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Data Abertura Final</label>
+                        <input formControlName="dataAberturaFinal" class="form-control px-2" placeholder="Selecione a data"
+                           type="date" name="dataAberturaEdital">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                  </div>
+
+                  <div class="form-row d-flex justify-content-between">
+                     <div class="form-group col-md-3">
+                        <label class="active">Modalidade</label>
+                        <select formControlName="modalidade" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let modalidade of dadosForm.modalidades" value="{{ modalidade.id }}">{{ modalidade.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Região</label>
+                        <select formControlName="regiao" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let regiao of dadosForm.regioes" value="{{ regiao.id }}">{{ regiao.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">UF</label>
+                        <select formControlName="estado" class="form-control px-2" placeholder="Selecione um Estado">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let estado of dadosForm.estados" value="{{ estado.id }}">{{ estado.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-1">
+                        <label class="active">UASG</label>
+                        <input type="text" formControlName="uasg" class="form-control px-2" aria-describedby="Usuario" maxlength="20">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Consórcio</label>
+                        <select formControlName="consorcio" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option value="Não">Não</option>
+                           <option value="Sim">Sim</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-row d-flex justify-content-start">
+                     <div class="form-group col-md-2">
+                        <label class="active">Portal</label>
+                        <select formControlName="portal" class="form-control">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let portal of dadosForm.portais" value="{{ portal.id }}">{{ portal.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Gerente de Contas</label>
+                        <select formControlName="gerenteDeContas" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let gerente of dadosForm.usuarios" value="{{ gerente.id }}">{{ gerente.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Diretor Comercial</label>
+                        <select formControlName="diretorComercial" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let diretor of dadosForm.usuarios" value="{{ diretor.id }}">{{ diretor.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Valor Estimado Inicio</label>
+                        <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="valorEstimadoInicio" class="form-control px-2"
+                           aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Valor Estimado Final</label>
+                        <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="valorEstimadoFinal" class="form-control px-2"
+                           aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-3 mt-2">
+                        <label class="active">Categoria</label>
+                        <select formControlName="categoria" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let categoria of dadosForm.categorias" value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3 mt-2">
+                        <label class="active">BU</label>
+                        <select formControlName="bu" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let bu of dadosForm.bus" value="{{ bu.id }}">{{ bu.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+               <legend data-toggle="collapse" data-target="#parecerGerente" aria-expanded="false" aria-controls="parecerGerente" (click)="toogleCard(2)"><span>Parecer Gerente</span><img [src]="toogleSetaGerente" class="seta"/></legend>
+               <hr />
+               <div class="collapse blockForm mx-2 pb-1" id="parecerGerente">
+                  <div class="form-row d-flex justify-content-start">
+                     <div class="form-group col-md-2 mr-md-3">
+                        <label class="active">Parecer</label>
+                        <select formControlName="parecer" class="form-control">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option value="Favoravel">Favoravel</option>
+                           <option value="Não favoravel">Não Favoravel</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2 mr-md-3">
+                        <label class="active">Motivo Comum</label>
+                        <select formControlName="motivoComum" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let motivo of dadosForm.motivosComuns" value="{{ motivo.id }}">{{ motivo.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Pre Venda</label>
+                        <select formControlName="preVenda" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let preVenda of dadosForm.preVendas" value="{{ preVenda.id }}">{{ preVenda.usuario.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+               <legend data-toggle="collapse" data-target="#parecerDiretor" aria-expanded="false" aria-controls="parecerDiretor" (click)="toogleCard(3)"><span>Parecer Diretor</span><img [src]="toogleSetaDiretor" class="seta"/></legend>
+               <hr />
+               <div class="collapse blockForm mx-2 pb-1" id="parecerDiretor">
+                  <div class="form-row d-flex justify-content-start">
+                     <div class="form-group col-md-2 mr-md-3">
+                        <label class="active">Decisao</label>
+                        <select formControlName="decisao" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option value="GO">GO</option>
+                           <option value="NOGO">NOGO</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3 mr-md-3">
+                        <label class="active">Empresa</label>
+                        <select formControlName="empresa" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let empresa of dadosForm.empresas" value="{{ empresa.id }}">{{ empresa.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+               <legend data-toggle="collapse" data-target="#parecerLicitacao" aria-expanded="false" aria-controls="parecerLicitacao" (click)="toogleCard(4)"><span>Parecer Licitação</span><img [src]="toogleSetaLicitacao" class="seta"/></legend>
+               <hr />
+               <div class="collapse blockForm mx-2 pb-1" id="parecerLicitacao">
+                  <div class="form-row d-flex justify-content-between">
+                     <div class="form-group col-md-2">
+                        <label class="active">Resultado</label>
+                        <select formControlName="resultado" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option value="ganhou">GANHOU</option>
+                           <option value="perdeu">PERDEU</option>
+                           <option value="fracasou">FRACASOU</option>
+                           <option value="revogado">REVOGADO</option>
+                           <option value="suspenso">SUSPENSO</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Motivo Perda</label>
+                        <select formControlName="motivoPerda" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let motivos of dadosForm.motivosPerdas" value="{{ motivos.id }}">{{ motivos.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Nosso Valor Inicio</label>
+                        <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="nossoValorInicio" class="form-control px-2"
+                           aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Nosso Valor Final</label>
+                        <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="nossoValorFinal" class="form-control px-2"
+                           aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Vencedor</label>
+                        <select formControlName="vencedor" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let concorrente of dadosForm.concorrentes" value="{{ concorrente.id }}">{{ concorrente.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+
+                  <div class="form-row d-flex justify-content-between">
+                     <div class="form-group col-md-2">
+                        <label class="active">Valor Vencedor Inicio</label>
+                        <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="valorVencedorInicio" class="form-control px-2"
+                           aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Valor Vencedor Final</label>
+                        <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="valorVencedorFinal" class="form-control px-2"
+                           aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Responsavel</label>
+                        <select formControlName="responsavel" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let responsavel of dadosForm.usuarios" value="{{ responsavel.id }}">{{ responsavel.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+               <div class="form-row d-flex justify-content-end">
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                     <button type="button" class="btn btn-primary botao" (click)="obterRelatorio()">Filtrar</button>
+                     <button type="button" class="btn btn-danger botao" (click)="limparFiltro()">Limpar</button>
+                     <button type="button" class="btn btn-warning botao" (click)="exportXLSX()">Exportar</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-md-12 d-flex justify-content-center align-items-center flex-column my-4">
+            <div class="areatabela">
+               <div class="card d-flex justify-content-center align-items-center px-4 py-3" *ngIf="dadosRelatorio && dadosRelatorio.length > 0">
+                  <div class="cardTags" *ngIf="tabTags.length > 0">
+                     <ul>
+                        <li class="tabButton" *ngFor="let tag of tabTags" (click)="toogleTab(tag)">{{tag}}</li>
+                     </ul>
+                  </div>
+
+                  <div class="tituloTabela">TABELA COM FILTROS - ({{dadosRelatorio.length}})</div>
+                  <table border="1" class="tabela" #table>
+                     <thead>
+                        <tr>
+                           <th (click)="toogleTab('id')" *ngIf="tabTags.indexOf('id') == -1">ID</th>
+                           <th (click)="toogleTab('cliente')" *ngIf="tabTags.indexOf('cliente') == -1">CLIENTE</th>
+                           <th (click)="toogleTab('nº edital')" *ngIf="tabTags.indexOf('nº edital') == -1">Nº EDITAL</th>
+                           <th (click)="toogleTab('uasg')" *ngIf="tabTags.indexOf('uasg') == -1">UASG</th>
+                           <th (click)="toogleTab('categoria')" *ngIf="tabTags.indexOf('categoria') == -1">CATEGORIAZAÇÃO</th>
+                           <th (click)="toogleTab('regiao')" *ngIf="tabTags.indexOf('regiao') == -1">REGIÃO</th>
+                           <th (click)="toogleTab('data de abertura')" *ngIf="tabTags.indexOf('data de abertura') == -1">DATA DE ABERTURA</th>
+                           <th (click)="toogleTab('modalidade')" *ngIf="tabTags.indexOf('modalidade') == -1">MODALIDADE</th>
+                           <th (click)="toogleTab('portal')" *ngIf="tabTags.indexOf('portal') == -1">PORTAL</th>
+                           <th (click)="toogleTab('gerente')" *ngIf="tabTags.indexOf('gerente') == -1">GERENTE</th>
+                           <th (click)="toogleTab('diretor')" *ngIf="tabTags.indexOf('diretor') == -1">DIRETOR</th>
+                           <th (click)="toogleTab('bu')" *ngIf="tabTags.indexOf('bu') == -1">BU</th>
+                           <th (click)="toogleTab('parecer')" *ngIf="tabTags.indexOf('parecer') == -1">PARECER</th>
+                           <th (click)="toogleTab('motivo comum')" *ngIf="tabTags.indexOf('motivo comum') == -1">MOTIVO COMUM</th>
+                           <th (click)="toogleTab('pre-venda')" *ngIf="tabTags.indexOf('pre-venda') == -1">PRE-VENDA</th>
+                           <th (click)="toogleTab('decisao')" *ngIf="tabTags.indexOf('decisao') == -1">DECISAO</th>
+                           <th (click)="toogleTab('empresa')" *ngIf="tabTags.indexOf('empresa') == -1">EMPRESA</th>
+                           <th (click)="toogleTab('resultado')" *ngIf="tabTags.indexOf('resultado') == -1">RESULTADO</th>
+                           <th (click)="toogleTab('motivo da perda')" *ngIf="tabTags.indexOf('motivo da perda') == -1">MOTIVO DA PERDA</th>
+                           <th (click)="toogleTab('nosso valor')" *ngIf="tabTags.indexOf('nosso valor') == -1">NOSSO VALOR</th>
+                           <th (click)="toogleTab('vencedor')" *ngIf="tabTags.indexOf('vencedor') == -1">VENCEDOR</th>
+                           <th (click)="toogleTab('valor vencedor')" *ngIf="tabTags.indexOf('valor vencedor') == -1">VALOR VENCEDOR</th>
+                           <th (click)="toogleTab('responsavel')" *ngIf="tabTags.indexOf('responsavel') == -1">RESPONSAVEL</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor="let dados of dadosRelatorio">
+                           <td *ngIf="tabTags.indexOf('id') == -1 && (dados.edital && dados.edital.id)">{{dados.edital.id}}</td>
+                           <td *ngIf="tabTags.indexOf('cliente') == -1 && (dados.edital && dados.edital.cliente)">{{dados.edital.cliente.apelido}}</td>
+                           <td *ngIf="tabTags.indexOf('nº edital') == -1">{{dados.edital.numEdital}}</td>
+                           <td *ngIf="tabTags.indexOf('uasg') == -1">{{dados.edital.uasg}}</td>
+
+                           <td *ngIf="tabTags.indexOf('categoria') == -1 && (dados.edital && dados.edital.categoria)">{{dados.edital.categoria.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('categoria') == -1 && (!dados.edital || !dados.edital.categoria)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('regiao') == -1">{{dados.edital.regiao.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('data de abertura') == -1">{{dados.edital.dataHoraDeAbertura | date:'dd/MM/yyyy HH:mm'}}</td>
+                           <td *ngIf="tabTags.indexOf('modalidade') == -1">{{dados.edital.modalidade.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('portal') == -1">{{dados.edital.portal.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('gerente') == -1">{{dados.edital.gerente.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('diretor') == -1">{{dados.edital.diretor.nome}}</td>
+
+                           <td *ngIf="tabTags.indexOf('bu') == -1 && dados.edital.categoria.bu">{{dados.edital.categoria.bu.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('bu') == -1 && !dados.edital.categoria.bu">--</td>
+
+                           <td *ngIf="tabTags.indexOf('parecer') == -1 && (dados.parecerGc && dados.parecerGc.parecer)">{{dados.parecerGc.parecer}}</td>
+                           <td *ngIf="tabTags.indexOf('parecer') == -1 && (!dados.parecerGc || !dados.parecerGc.parecer)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('motivo comum') == -1 && (dados.parecerGc && dados.parecerGc.motivoComum)">{{dados.parecerGc.motivoComum.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('motivo comum') == -1 && (!dados.parecerGc || !dados.parecerGc.motivoComum)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('pre-venda') == -1 && (dados.parecerGc && dados.parecerGc.preVenda)">{{dados.parecerGc.preVenda.usuario.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('pre-venda') == -1 && (!dados.parecerGc || !dados.parecerGc.preVenda)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('decisao') == -1 && (dados.parecerDc && dados.parecerDc.decisao)">{{dados.parecerDc.decisao}}</td>
+                           <td *ngIf="tabTags.indexOf('decisao') == -1 && (!dados.parecerDc || !dados.parecerDc.decisao)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('empresa') == -1 && (dados.parecerDc && dados.parecerDc.empresa)">{{dados.parecerDc.empresa.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('empresa') == -1 && (!dados.parecerDc || !dados.parecerDc.empresa)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('resultado') == -1 && (dados.parecerLicitacao && dados.parecerLicitacao.resultado)">{{dados.parecerLicitacao.resultado}}</td>
+                           <td *ngIf="tabTags.indexOf('resultado') == -1 && (!dados.parecerLicitacao || !dados.parecerLicitacao.resultado)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('motivo da perda') == -1 && (dados.parecerLicitacao && dados.parecerLicitacao.motivoPerda)">{{dados.parecerLicitacao.motivoPerda.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('motivo da perda') == -1 && (!dados.parecerLicitacao || !dados.parecerLicitacao.motivoPerda)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('nosso valor') == -1 && (dados.parecerLicitacao && dados.parecerLicitacao.nossoValor)">{{dados.parecerLicitacao.nossoValor | currency : 'R$'}}</td>
+                           <td *ngIf="tabTags.indexOf('nosso valor') == -1 && (!dados.parecerLicitacao || !dados.parecerLicitacao.nossoValor)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('vencedor') == -1 && (dados.parecerLicitacao && dados.parecerLicitacao.vencedor)">{{dados.parecerLicitacao.vencedor.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('vencedor') == -1 && (!dados.parecerLicitacao || !dados.parecerLicitacao.vencedor)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('valor vencedor') == -1 && (dados.parecerLicitacao && dados.parecerLicitacao.valorVencedor)">{{dados.parecerLicitacao.valorVencedor | currency : 'R$'}}</td>
+                           <td *ngIf="tabTags.indexOf('valor vencedor') == -1 && (!dados.parecerLicitacao || !dados.parecerLicitacao.valorVencedor)">--</td>
+
+                           <td *ngIf="tabTags.indexOf('responsavel') == -1 && (dados.parecerLicitacao && dados.parecerLicitacao.responsavel)">{{dados.parecerLicitacao.responsavel.nome}}</td>
+                           <td *ngIf="tabTags.indexOf('responsavel') == -1 && (!dados.parecerLicitacao || !dados.parecerLicitacao.responsavel)">--</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+      </div>
+   </div>
+</div>

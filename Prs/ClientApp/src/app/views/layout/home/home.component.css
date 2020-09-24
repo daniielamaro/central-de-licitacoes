@@ -1,0 +1,57 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+
+.borda{
+  border: 1px solid black;
+}
+
+.checkboxEtapa{
+   width: 18px;
+   height: 18px;
+}
+
+.card {
+   width: 90vw;
+   padding: 20px;
+   box-shadow: 0 8px 14px -6px black;
+}
+
+
+legend {
+   padding: 0px 10px;
+   color: rgb(3, 76, 192);
+   font-size: 1.4rem;
+   cursor: pointer;
+   width: 120px;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+hr {
+   margin-left: 10px;
+   width: 100px;
+   border: 1px solid rgb(0, 5, 75);
+   margin-bottom: 8px;
+}
+
+.botao {
+   font-size: 14pt;
+   border: none;
+   border-radius: 5px;
+   padding: 5px 10px;
+}
+
+.blockForm{
+   background-color: rgb(236, 236, 236);
+   border-radius: 5px;
+   box-shadow: 0 1px 8px -1px rgba(0, 0, 0, 0.6);
+   margin-bottom: 6px;
+}
+
+.seta{
+   width: 20px;
+   height: 20px;
+}

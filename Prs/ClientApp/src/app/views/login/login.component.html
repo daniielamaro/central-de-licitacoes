@@ -1,0 +1,72 @@
+<div class="container-flex login d-flex justify-content-center align-items-center">
+    <div class="row">
+        <div *ngIf="!solicitarAcesso" class="col-12-md quadro">
+            <div class="mb-4 d-flex justify-content-center">
+                <img src="../../../assets/images/logocl.png">
+            </div>
+            <form [formGroup]="loginForm" class="formulario">
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <input type="text" formControlName="user" class="form-control p-2 inputBox" id="validationServer01" placeholder="login" required>   
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <input type="password" formControlName="pass" class="form-control p-2 inputBox" id="validationServer02" placeholder="senha" required>
+                    </div>
+                </div>
+                <hr class="mb-3"/>
+                <div class="form-row ">
+                    <div class="col-sm-12 col-md-12 d-flex justify-content-between">
+                        <div class="form-group form-check d-flex justify-content-start align-items-center">
+                            <input type="checkbox" [checked]="lembrarSenha" (change)="lembrarSenha = !lembrarSenha"><label class="pl-2">Lembre senha</label>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" [disabled]="!loginForm.valid" (click)="login()" type="submit">Logar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="mb-4 d-flex justify-content-center">
+                <a (click)="solicitarAcesso = true" href="javascript:void(0)">Solicitar meu acesso</a>
+            </div>
+        </div>
+
+        <div *ngIf="solicitarAcesso" class="col-12-md quadro">
+            <div class="mb-4 d-flex justify-content-center">
+                <img src="../../../assets/images/logocl.png">
+            </div>
+            <div class="mb-4 d-flex justify-content-center">
+                <span>Solicitar Acesso</span>
+            </div>
+            <form [formGroup]="solicitaForm" class="formulario">
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <input type="text" formControlName="nome" class="form-control p-2 inputBox" id="validationServer01" placeholder="Nome Completo" required>   
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <input type="text" formControlName="email" class="form-control p-2 inputBox" id="validationServer02" placeholder="Email corporativo" required>   
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-12 mb-3">
+                        <textarea rows="5" formControlName="motivo" class="form-control p-2 inputBox" id="validationServer03" placeholder="Motivo da requisição" required></textarea>
+                    </div>
+                </div>
+                <hr class="mb-3"/>
+                <div class="form-row ">
+                    <div class="col-sm-12 col-md-12 d-flex justify-content-between">
+                        <div class="form-group form-check d-flex justify-content-start align-items-center">
+                            <button class="btn btn-primary" [disabled]="!solicitaForm.valid" (click)="solicitar()" type="submit">Enviar</button>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" (click)="solicitarAcesso = false">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> 

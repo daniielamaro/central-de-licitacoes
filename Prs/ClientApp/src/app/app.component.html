@@ -1,0 +1,5 @@
+ <app-menu *ngIf="router.url != '/login'"></app-menu>
+<app-header *ngIf="router.url != '/login'"></app-header> 
+<div class="scroll" [ngClass]="{'content' : router.url != '/login'}">
+    <router-outlet></router-outlet>
+</div>

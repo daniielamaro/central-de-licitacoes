@@ -1,0 +1,16 @@
+<div class="header d-flex justify-content-end align-items-center">
+   <app-notificacao *ngIf="user" [user]="user"></app-notificacao>
+   <div class="nome">
+      <p>{{nomeUser}}</p>
+   </div>
+   <div class="iconi">
+      <div class="">
+         <img id="botaoMenuUsuario dropdown-toggle" src="../../../../assets/iconis/userH.png" data-toggle="collapse" href="#menuUsuario" role="button"/>
+         <div class="card menuUsuario collapse" id="menuUsuario">
+            <ul class="list-group list-group-flush">
+               <li class="list-group-item" (click)="logout()">Logout</li>
+            </ul>
+         </div>
+      </div>
+   </div>
+</div>

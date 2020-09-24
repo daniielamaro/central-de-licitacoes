@@ -1,0 +1,148 @@
+* {
+   padding: 0;
+   margin: 0;
+   font-family: "Ubuntu", sans-serif;
+}
+
+.nameComponent {
+   border: 1px solid rgb(207, 207, 207);
+   border-radius: 5px;
+   width: 250px;
+   padding: 5px;
+   text-align: center;
+   box-shadow: 0 8px 6px -6px black;
+   margin-bottom: 15px;
+   color: rgb(3, 76, 192);
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.card {
+   width: 80vw;
+   box-shadow: 0 1px 8px -1px black;
+}
+
+.card-end .card {
+   width: 39.8vw;
+}
+
+legend {
+   padding: 0px 10px;
+   color: rgb(3, 76, 192);
+}
+
+.legendCadastrar{
+   cursor: pointer;
+   width: 50%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+hr {
+   margin-left: 10px;
+   margin-bottom: 20px;
+   border: 1px solid rgb(0, 5, 75);
+}
+
+.form-row {
+   padding: 10px 12px;
+}
+
+.botao {
+   font-size: 14pt;
+   border: none;
+   border-radius: 5px;
+   padding: 5px 10px;
+}
+
+.btnAnexo {
+   width: 100%;
+   min-height: 40px;
+   line-height: 40px;
+   padding: 4px 10px;
+}
+
+.seta{
+   width: 20px;
+   height: 20px;
+}
+
+.btnExcluir {
+   width: 50px;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+   border-left: 5px solid #42a948;
+}
+
+.ng-invalid:not(form) {
+   border-left: 5px solid #a94442;
+}
+
+.ng-invalid[_ngcontent-c1]:not(form) {
+   border-left: 5px solid #f26522;
+}
+.layers.bd.bgc-white.p-20 {
+   border: 1px solid rgb(156, 191, 71) !important;
+}
+
+.my-drop-zone {
+   border: dotted 3px lightgray;
+}
+
+.nv-file-over {
+   border: dotted 3px red;
+}
+
+.another-file-over-class {
+   border: dotted 3px green;
+}
+
+.plus-edital {
+   cursor: pointer;
+}
+
+.btUpload {
+   margin: 20px;
+}
+
+.listaEstadosTopo{
+   margin-top: 30px;
+   margin-bottom: 30px;
+}
+
+.listaDissidios {
+   color: #fff;
+   cursor: pointer;
+   border: 1px solid #fff;
+}
+
+.fundovermelho {
+   background-color: crimson;
+}
+
+.fundoverde {
+   background-color: green;
+}
+
+.fundolaranja {
+   background-color: orangered;
+}
+
+.btnSuspender{
+   width: 200px;
+   margin-left: 20px;
+   margin-right: 20px;
+}
+
+.itemDissidio{
+   margin-bottom: 10px;
+}
+
+.descricaoItemDissidio{
+   margin-right: 10px;
+}

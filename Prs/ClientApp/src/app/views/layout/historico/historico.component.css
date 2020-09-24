@@ -1,0 +1,65 @@
+* {
+   padding: 0;
+   margin: 0;
+   font-family: "Ubuntu", sans-serif;
+}
+
+.nameComponent {
+   border: 1px solid rgb(207, 207, 207);
+   border-radius: 5px;
+   width: 150px;
+   padding: 5px;
+   text-align: center;
+   box-shadow: 0 8px 6px -6px black;
+   margin-bottom: 15px;
+   color: rgb(3, 76, 192);
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.card {
+   width: 80vw;
+   box-shadow: 0 1px 8px -1px black;
+}
+
+
+legend {
+   padding: 0px 10px;
+   color: rgb(3, 76, 192);
+   font-size: 1.4rem;
+}
+
+hr {
+   margin-left: 10px;
+   width: 20%;
+   border: 1px solid rgb(0, 5, 75);
+   margin-bottom: 8px;
+}
+
+tbody tr:nth-child(even) {
+   background-color: lightcyan;
+}
+
+tbody tr:hover {
+   background-color: darkslategrey;
+   color: #fff;
+   cursor: pointer;
+}
+
+.tabela {
+   width: 100%;
+}
+
+thead tr th {
+   background-color: gainsboro;
+   text-align: center;
+   font-size: 13px;
+}
+
+tbody tr td {
+   text-align: center;
+   padding: 5px;
+   font-size: 12px;
+}

@@ -1,0 +1,87 @@
+<div class="container-fluid">
+    <div class="row painel">
+        <div class="col-ms-6 col-md-4 d-flex justify-content-center">
+            <app-painel  [titulo]="'TMC'" [tipo]="'sla'" [conteudo]="tmc" [sla]="tmcOk"></app-painel>
+        </div>
+        <div class="col-ms-6 col-md-4 d-flex justify-content-center">
+            <app-painel [titulo]="'TMPG'" [tipo]="'sla'" [conteudo]="tmpg" [sla]="tmpgOk"></app-painel>
+        </div>
+        <div class="col-ms-6 col-md-4 d-flex justify-content-center">
+            <app-painel [titulo]="'TMPD'" [tipo]="'sla'" [conteudo]="tmpd" [sla]="tmpdOk"></app-painel>
+        </div>
+    </div>
+
+    <div *ngIf="slaGerentes" class="row">
+        <div class="col-ms-12 col-md-12 py-3 d-flex justify-content-center align-items-center">
+            <div class="areatabela">
+                <div class="card d-flex justify-content-center align-items-center">
+                    <div class="titulotabelagerente">SLA`s dos Gerentes</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tempo médio geral</th>
+                                <th>Tempo médio mensal</th>
+                                <th>SLA</th>
+                                <th>Tempo base</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let slaGerente of slaGerentes">
+                                <td>{{slaGerente.gerente.nome}}</td>
+                                <td>{{slaGerente.tempoGeral}}</td>
+                                <td>{{slaGerente.tempoMensal}}</td>
+                                <td *ngIf="slaGerente.sla"><img width="25px" src="../../../../assets/images/slaok.png" /></td>
+                                <td *ngIf="!slaGerente.sla"><img width="25px" src="../../../../assets/images/slanotok.png" /></td>
+                                <td>{{slaGerente.tempoBase}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+    <div *ngIf="!slaGerentes" class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="slaDiretores" class="row">
+        <div class="col-ms-12 col-md-12 py-3 d-flex justify-content-center align-items-center">
+            <div class="areatabela">
+                <div class="card d-flex justify-content-center align-items-center">
+                    <div class="titulotabeladiretor">SLA`s dos Diretores</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Tempo médio geral</th>
+                                <th>Tempo médio mensal</th>
+                                <th>SLA</th>
+                                <th>Tempo base</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let slaDiretor of slaDiretores">
+                                <td>{{slaDiretor.diretor.nome}}</td>
+                                <td>{{slaDiretor.tempoGeral}}</td>
+                                <td>{{slaDiretor.tempoMensal}}</td>
+                                <td *ngIf="slaDiretor.sla"><img width="25px" src="../../../../assets/images/slaok.png" /></td>
+                                <td *ngIf="!slaDiretor.sla"><img width="25px" src="../../../../assets/images/slanotok.png" /></td>
+                                <td>{{slaDiretor.tempoBase}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+    <div *ngIf="!slaDiretores" class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,245 @@
+<div class="container-fluid pb-5">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="nameComponent">
+            <h3 *ngIf="!atualizar && !finalizar" class="">Cadastrar</h3>
+            <h3 *ngIf="atualizar && !finalizar" class="">Atualizar</h3>
+            <h3 *ngIf="finalizar" class="">Finalizar</h3>
+            <h3>Parecer Licitacao</h3>
+         </div>
+         <form class="d-flex justify-content-center align-items-center flex-column" [formGroup]="parecerLicitacaoForm">
+            <div class="card my-1 py-3">
+               <legend>Informações Gerais</legend>
+               <hr />
+               <div class="d-flex justify-content-center" *ngIf="!edital">
+                  <div class="spinner-border text-primary" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+               <div class="form-row d-flex justify-content-between" *ngIf="edital">
+                  <div class="form-group col-md-1 d-flex flex-column ">
+                     <label class="active">ID Edital</label>
+                     <span class="conteudo bg-info text-white">{{ edital.id }}</span>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Número do Edital</label>
+                     <span class="conteudo bg-info text-white">{{ edital.numEdital }}</span>
+                  </div>
+                  <div class="form-group col-md-4 d-flex flex-column">
+                     <label class="active">Cliente</label>
+                     <span class="conteudo bg-info text-white">{{ edital.cliente.nome }}</span>
+                  </div>
+                  <div class="form-group col-md-3 d-flex flex-column">
+                     <label class="active">Data de Abertura do Edital</label>
+                     <span class="conteudo bg-info text-white">{{ edital.dataHoraDeAbertura | date: 'dd/MM/yyyy HH:mm' }}</span>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Valor Estimado</label>
+                     <span class="conteudo bg-info text-white">{{edital.valorEstimado | currency : 'R$'}}</span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Resultado Gerente de Contas</legend>
+               <hr />
+               <div class="d-flex justify-content-center" *ngIf="!parecerGerente">
+                  <div class="spinner-border text-primary" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+               <div class="form-row d-flex justify-content-between" *ngIf="parecerGerente">
+                  <div *ngIf="edital" class="form-group col-md-3 d-flex flex-column ">
+                     <label class="active">Nome do Gerente</label>
+                     <span class="conteudo bg-info text-white">{{ edital.gerente.nome }}</span>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Parecer</label>
+                     <span class="conteudo bg-info text-white">{{ parecerGerente.parecer }}</span>
+                  </div>
+                  <div *ngIf="parecerGerente.motivoComum" class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Motivo</label>
+                     <span class="conteudo bg-info text-white">{{ parecerGerente.motivoComum.nome }}</span>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Natureza</label>
+                     <span class="conteudo bg-info text-white">{{ parecerGerente.natureza }}</span>
+                  </div>
+                  <div *ngIf="parecerGerente.crm > 0" class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Codigo CRM</label>
+                     <span class="conteudo bg-info text-white">{{ parecerGerente.crm }}</span>
+                  </div>
+                  <div *ngIf="parecerGerente.observacao" class="form-group col-md-4 d-flex flex-column">
+                     <label class="active">Observaçoes</label>
+                     <span class="conteudo bg-info text-white">{{ parecerGerente.observacao }}</span>
+                  </div>
+                  <div class="form-group col-md-5 d-flex flex-column">
+                     <label class="active">Empresa</label>
+                     <span class="conteudo bg-info text-white">{{ parecerGerente.empresa.nome }}</span>
+                  </div>
+                  <div *ngIf="parecerGerente.preVenda" class="form-group col-md-3 d-flex flex-column">
+                     <label class="active">Pré Venda</label>
+                     <span *ngIf="parecerGerente.preVenda.usuario" class="conteudo bg-info text-white">{{ parecerGerente.preVenda.usuario.nome }}</span>
+                     <span *ngIf="!parecerGerente.preVenda.usuario" class="conteudo bg-info text-white">Não definido</span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Resultado Diretor Comercial</legend>
+               <hr />
+               <div class="d-flex justify-content-center" *ngIf="!parecerDiretor">
+                  <div class="spinner-border text-primary" role="status">
+                     <span class="sr-only">Loading...</span>
+                  </div>
+               </div>
+               <div class="form-row d-flex justify-content-between" *ngIf="parecerDiretor">
+                  <div *ngIf="edital" class="form-group col-md-3 d-flex flex-column ">
+                     <label class="active">Nome do Diretor</label>
+                     <span class="conteudo bg-info text-white">{{ edital.diretor.nome }}</span>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Decisao</label>
+                     <span class="conteudo bg-info text-white">{{ parecerDiretor.decisao }}</span>
+                  </div>
+                  <div *ngIf="parecerDiretor.motivoComum" class="form-group col-md-4 d-flex flex-column">
+                     <label class="active">Motivo</label>
+                     <span class="conteudo bg-info text-white">{{ parecerDiretor.motivoComum }}</span>
+                  </div>
+                  <div class="form-group col-md-3 d-flex flex-column">
+                     <label class="active">Gerente</label>
+                     <span class="conteudo bg-info text-white">{{ parecerDiretor.gerente.nome }}</span>
+                  </div>
+                  <div class="form-group col-md-4 d-flex flex-column">
+                     <label class="active">Empresa</label>
+                     <span class="conteudo bg-info text-white">{{ parecerDiretor.empresa.nome }}</span>
+                  </div>
+                  <div *ngIf="parecerDiretor.observacao" class="form-group col-md-4 d-flex flex-column">
+                     <label class="active">Observaçoes</label>
+                     <span class="conteudo bg-info text-white">{{ parecerDiretor.observacao }}</span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Parecer Licitação</legend>
+               <hr />
+               <div class="form-row d-flex-md justify-content-between">
+                  <div class="form-group col-md-4 d-flex flex-column ">
+                     <label class="active">Resultado</label>
+                     <select class="form-control px-2" formControlName="resultado" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option (click)="setParecer(true, true)" value="ganhou">GANHOU</option>
+                        <option (click)="setParecer(false, true)" value="perdeu">PERDEU</option>
+                        <option (click)="setParecer(true, false)" value="fracassou">FRACASSOU</option>
+                        <option (click)="setParecer(true, false)" value="revogado">REVOGADO</option>
+                     </select>
+                  </div>
+
+                  <div class="form-group col-md-4 flex-column" [hidden]="parecerLicitacaoForm.get('resultado').value != 'ganhou' && parecerLicitacaoForm.get('resultado').value != 'perdeu'">
+                     <div class="form-group col-md-12 d-flex flex-column">
+                        <label class="active">Nosso Valor</label>
+                        <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" placeholder="R$ 0,00" class="form-control px-2" formControlName="nossoValor" [required]="parecerLicitacaoForm.get('resultado').value == 'ganhou' || parecerLicitacaoForm.get('resultado').value == 'perdeu'" />
+                     </div>
+                  </div>
+
+                  <div class="form-group col-md-4 flex-column" [hidden]="parecerLicitacaoForm.get('resultado').value != 'ganhou' && parecerLicitacaoForm.get('resultado').value != 'perdeu'">
+                     <div class="form-group col-md-12 d-flex flex-column">
+                        <label class="active">Responsavel</label>
+                        <select class="form-control px-2" formControlName="responsavel" [required]="parecerLicitacaoForm.get('resultado').value == 'ganhou' || parecerLicitacaoForm.get('resultado').value == 'perdeu'">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let responsavel of dadosFormResponsavel" value="{{responsavel.id}}">{{ responsavel.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+               </div>
+
+
+
+               <div class="form-row d-flex-md justify-content-between" [hidden]="parecerLicitacaoForm.get('resultado').value != 'perdeu'">
+                  <div class="form-group col-md-3 d-flex flex-column">
+                     <label class="active">Motivo Perda</label>
+                     <select class="form-control px-2" formControlName="motivoPerda" [required]="parecerLicitacaoForm.get('resultado').value == 'perdeu'">
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let motivoPerda of dadosFormMotivo" value="{{motivoPerda.id}}">{{ motivoPerda.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-4 d-flex flex-column ">
+                     <label class="active">Vencedor</label>
+                     <select class="form-control px-2" formControlName="vencedor" [required]="parecerLicitacaoForm.get('resultado').value == 'perdeu'">
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let cliente of dadosFormVencedor" value="{{cliente.id}}">{{ cliente.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-3 d-flex flex-column">
+                     <label class="active">Valor Vencedor</label>
+                     <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" placeholder="R$ 0,00" class="form-control px-2" formControlName="valorVencedor" [required]="parecerLicitacaoForm.get('resultado').value == 'perdeu'"/>
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column">
+                     <label class="active">Nossa Classificação</label>
+                     <input type="number" class="form-control px-2" formControlName="nossaClassificacao" [required]="parecerLicitacaoForm.get('resultado').value == 'perdeu'"/>
+                  </div>
+               </div>
+
+               <div class="form-row d-flex-md justify-content-center">
+                  <div class="form-group col-md-6 d-flex flex-column">
+                     <label class="active">Observação</label>
+                     <textarea class="form-control px-2" rows="4" formControlName="observacao"></textarea>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Anexos Licitação</legend>
+               <hr />
+               <div class="form-row d-flex justify-content-around">
+
+                  <div class="form-group col-md-6 d-flex justify-content-center align-items-center flex-column">
+                     <label class="active">Anexo 1</label>
+                     <div class="form-group pt-5" *ngIf="!arquivo1">
+                        <app-upload [tituloBt]="'Upload'" [idBt]="'anexo1bt'" (evento)="upload($event, 1)"></app-upload>
+                     </div>
+                     <div class="form-group col-md-12 pt-3 d-flex justify-content-center" *ngIf="arquivo1">
+                        <div class="btn-group" role="group" aria-label="...">
+                           <a class="btn btn-info btnAnexo" (click)="downloadAnexo(0)"
+                              href="javascript:void(0);">{{ arquivo1.nome }}</a>
+                           <button type="button" class="btn btn-danger btnExcluir" href="javascript:void(0);"
+                              (click)="excluirAnexo(1)">
+                              X
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="form-group col-md-6 d-flex flex-column justify-content-center align-items-center">
+                     <label class="active">Anexo 2</label>
+                     <div class="form-group pt-5" *ngIf="!arquivo2">
+                        <app-upload [tituloBt]="'Upload'" [idBt]="'anexo2bt'" (evento)="upload($event, 2)"></app-upload>
+                     </div>
+                     <div class="form-group col-md-12 pt-3 d-flex justify-content-center" *ngIf="arquivo2">
+                        <div class="btn-group" role="group" aria-label="...">
+                           <a class="btn btn-info btnAnexo" (click)="downloadAnexo(1)"
+                              href="javascript:void(0);">{{ arquivo2.nome }}</a>
+                           <button type="button" class="btn btn-danger btnExcluir" href="javascript:void(0);"
+                              (click)="excluirAnexo(2)">
+                              X
+                           </button>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <a href="" id="download-anexo" download=""></a>
+
+            <div class="card my-1 py-3 px-3">
+               <div class="form-group col-md-12">
+                  <button *ngIf="!atualizar && !finalizar" class="btn btn-success btn-lg btnSubmit" (click)="processar()" [disabled]="!parecerLicitacaoForm.valid" type="submit">Cadastrar</button>
+                  <button *ngIf="atualizar && !finalizar" class="btn btn-success btn-lg btnSubmit" (click)="processar()" [disabled]="!parecerLicitacaoForm.valid" type="submit">Alterar</button>
+                  <button *ngIf="finalizar" class="btn btn-success btn-lg btnSubmit" (click)="processar()" [disabled]="!parecerLicitacaoForm.valid" type="submit">Finalizar</button>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>

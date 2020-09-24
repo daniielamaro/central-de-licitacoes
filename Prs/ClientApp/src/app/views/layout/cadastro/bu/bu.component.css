@@ -1,0 +1,101 @@
+* {
+   padding: 0;
+   margin: 0;
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.card {
+   width: 80vw;
+   padding: 20px;
+   box-shadow: 0 8px 14px -6px black;
+}
+
+.cardScroll {
+   max-height: 600px;
+}
+
+legend {
+   padding: 0px 10px;
+   color: rgb(3, 76, 192);
+}
+
+hr {
+   margin-left: 10px;
+   width: 16%;
+   border: 1px solid rgb(0, 5, 75);
+   margin-bottom: 20px;
+}
+
+.botao {
+   font-size: 14pt;
+   border: none;
+   border-radius: 5px;
+   padding: 0px 10px;
+   height: 40px;
+}
+
+.areatabela {
+   width: 100%;
+}
+
+.tituloTabela {
+   width: 100%;
+   color: #fff;
+   padding: 2px;
+   text-align: center;
+   background-color: blueviolet;
+}
+
+.tabela {
+   width: 100%;
+}
+
+thead tr th {
+   background-color: gainsboro;
+   text-align: center;
+   font-size: 14px;
+}
+
+tbody tr td {
+   padding: 5px;
+   font-size: 14px;
+   text-transform: uppercase;
+}
+
+tbody tr:nth-child(even) {
+   background-color: lightcyan;
+}
+
+tbody tr:hover {
+   background-color: darkslategrey;
+   color: #fff;
+   cursor: pointer;
+}
+
+.status {
+   text-align: center;
+}
+
+.red {
+   color: red;
+}
+
+.scroll{
+   overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+   width: 10px;
+   background: #e3e0d6;
+   border-radius: 10px;
+}
+.scroll::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1);
+}
+.scroll::-webkit-scrollbar-thumb {
+   background: #8b8778;
+   border-radius: 10px;
+}

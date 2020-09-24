@@ -1,0 +1,14 @@
+<div class="area-notif">
+   <div *ngIf="quantNotif" class="notificacoes">
+      <div class="conteudo-notif">{{ quantNotif }}</div>
+   </div>
+   <div class="alerta">
+      <img src="../../../../assets/iconis/alerta01.png" data-toggle="collapse" href="#notificacao" role="button" >
+   </div>
+   <div class="card painelNotif collapse" id="notificacao">
+      <ul class="list-group list-group-flush">
+         <li class="list-group-item" *ngFor="let pendenciaG of pendenciaGerente" (click)="emitirParecerGerente(pendenciaG.id)">Parecer Gerente ID: {{pendenciaG.id}}</li>
+         <li class="list-group-item" *ngFor="let pendenciaD of pendenciaDiretor">Parecer Diretor ID: {{pendenciaD.id}}</li>
+      </ul>
+   </div>
+</div>

@@ -1,0 +1,197 @@
+<div class="container-fluid pb-5">
+   <div class="row">
+      <div class="col-md-12">
+         <div class="nameComponent">
+            <h3 *ngIf="!atualizar && !restaurar" class="">Cadastrar Edital</h3>
+            <h3 *ngIf="atualizar" class="">Atualizar Edital</h3>
+            <h3 *ngIf="restaurar" class="">Restaurar Edital</h3>
+         </div>
+         <form class="d-flex justify-content-center align-items-center flex-column" [formGroup]="cadastrarEditalForm">
+            <div class="card my-1 py-3">
+               <div class="d-flex justify-content-between">
+                  <legend>Informações Gerais</legend>
+                  <div *ngIf="edital">
+                     <button *ngIf="!restaurar && atualizar && !edital.suspenso && (user.role.nome == 'administrador' || user.role.nome == 'licitacao')" (click)="suspenderEdital()" class="btn btn-primary btnSuspender">Suspender Edital</button>
+                     <button *ngIf="!restaurar && atualizar && edital.suspenso" (click)="restaurarEditalByAtualizacao()" [disabled]="(user.role.nome != 'administrador' && user.role.nome != 'licitacao') || cadastrarEditalForm.invalid" class="btn btn-warning btnSuspender">Este edital está suspenso</button>
+                  </div>
+               </div>
+               <hr/>
+               <div class="form-row d-flex justify-content-between">
+                  <div class="form-group col-md-3">
+                     <label class="active">Número do Edital</label>
+                     <input type="text" formControlName="numEdital" name="numEdital" class="form-control px-2" required>
+                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  </div>
+                  <div class="form-group col-md-5">
+                     <label class="active">Clientes <span class="ti-plus plus-edital" (click)="registerNewElement('/clientes')"></span></label>
+                     <select formControlName="cliente" class="form-control px-2" name="cliente" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let cliente of clientes" value="{{ cliente.id }}">{{ cliente.apelido }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                     <label class="active">Data Abertura Edital</label>
+                     <input formControlName="dataAberturaEdital" class="form-control px-2" placeholder="Selecione a data" type="date" name="dataAberturaEdital" required>
+                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  </div>
+                  <div class="form-group col-md-2">
+                     <label class="active">Hora Abertura Edital</label>
+                     <input type="time" formControlName="horaAberturaEdital" class="form-control px-2" aria-describedby="Usuario" name="horaAberturaEdital" required>
+                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  </div>
+               </div>
+               <div class="form-row d-flex justify-content-between">
+                  <div class="form-group col-md-3">
+                     <label class="active">Modalidade <span class="ti-plus plus-edital" (click)="registerNewElement('/modalidades')"></span></label>
+                     <select formControlName="modalidade" class="form-control px-2" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let modalidade of modalidades" value="{{ modalidade.id }}">{{ modalidade.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                     <label class="active">Região <span class="ti-plus plus-edital" (click)="modalidades('/regioes')"></span></label>
+                     <select formControlName="regiao" class="form-control px-2" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let regiao of regioes" value="{{ regiao.id }}">{{ regiao.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                     <label class="active">UF</label>
+                     <select formControlName="estado" class="form-control px-2" placeholder="Selecione um Estado" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let estado of estados" value="{{ estado.id }}">{{ estado.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-2">
+                     <label class="active">UASG</label>
+                     <input type="text" formControlName="uasg" class="form-control px-2" aria-describedby="Usuario" maxlength="20" required>
+                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  </div>
+                  <div class="form-group col-md-2">
+                     <label class="active">Consórcio</label>
+                     <select formControlName="consorcio" class="form-control px-2" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option value="Não">Não</option>
+                        <option value="Sim">Sim</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="form-row d-flex justify-content-between">
+                <div class="form-group col-md-3">
+                  <label class="active">Portal <span class="ti-plus plus-edital" (click)="registerNewElement('/portais')"></span></label>
+                  <select formControlName="portal" class="form-control" required>
+                    <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                    <option *ngFor="let portal of portais" value="{{ portal.id }}">{{ portal.nome }}</option>
+                  </select>
+                </div>
+                  <div class="form-group col-md-3">
+                     <label class="active">Gerente de Contas <span class="ti-plus plus-edital" (click)="registerNewElement('/usuarios')"></span></label>
+                     <select formControlName="gerenteDeContas" class="form-control px-2" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let gerente of gerentes" value="{{ gerente.id }}">{{ gerente.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                     <label class="active">Diretor Comercial <span class="ti-plus plus-edital" (click)="registerNewElement('/usuarios')"></span></label>
+                     <select formControlName="diretorComercial" class="form-control px-2" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let diretor of diretores" value="{{ diretor.id }}">{{ diretor.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-3">
+                     <label class="active">Valor Estimado</label>
+                     <input type="text" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',', align: 'left' }" formControlName="valorEstimado" class="form-control px-2" aria-describedby="Usuario" placeholder="R$ 0,00">
+                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Agendar Vistoria</legend><hr/>
+               <div class="form-row">
+                  <div class="form-group col-md-2">
+                     <div class="form-check d-flex align-items-center radio">
+                        <input class="" type="radio" formControlName="agendarVistoria" value="Sim" name="agendarVistoria">
+                        <span class="ml-2">Sim</span>
+                     </div>
+                     <div class="form-check form-check d-flex align-items-center radio">
+                        <input class="" type="radio" formControlName="agendarVistoria" value="Não" name="agendarVistoria">
+                        <span class="ml-2">Não</span>
+                     </div>
+                     <div class="form-check form-check d-flex align-items-center radio">
+                        <input class="" type="radio" formControlName="agendarVistoria" value="Facultativo" name="agendarVistoria">
+                        <span class="ml-2">Facultativo</span>
+                     </div>
+                  </div>
+                  <div class="form-group col-md-2 dataVistoria ml-5" *ngIf="cadastrarEditalForm.get('agendarVistoria').value == 'Sim' || cadastrarEditalForm.get('agendarVistoria').value == 'Facultativo'">
+                     <label class="active">Data da Vistoria</label>
+                     <input formControlName="dataVistoria" class="form-control px-2" type="date">
+                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <legend>Objetos</legend><hr/>
+               <div class="form-row d-flex justify-content-between">
+                  <div class="form-group col-md-5">
+                     <label class="active">Categorização do Edital <span class="ti-plus plus-edital" (click)="registerNewElement('/categorias')"></span></label>
+                     <select formControlName="categorizacao" class="form-control px-2" name="categorizacao" required>
+                        <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                        <option *ngFor="let categoria of categorias" value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                     </select>
+                  </div>
+                  <div class="form-group col-md-6">
+                     <label class="active">Descrição</label>
+                     <textarea formControlName="objetosDescricao" class="form-control px-2" rows="4"></textarea>
+                  </div>
+               </div>
+            </div>
+
+            <div class="d-flex justify-content-start card-end">
+               <div class="card my-1 py-3 mr-1">
+                  <legend>Observações</legend><hr/>
+                  <div class="form-row d-flex justify-content-center">
+                     <div class="form-group col-md-12">
+                        <label class="active">Observações</label>
+                        <textarea formControlName="observacao" class="form-control px-2" rows="4"></textarea>
+                     </div>
+                  </div>
+               </div>
+               <div class="card my-1 py-3 ml-1">
+                  <legend>Anexo</legend><hr/>
+                  <div class="form-row d-flex justify-content-center">
+                     <div class="form-group col-md-12 d-flex justify-content-center">
+                        <app-upload [tituloBt]="'Upload Edital'" [idBt]="'anexobt'" *ngIf="!exibirUpload" (evento)="upload($event)"></app-upload>
+                        <div *ngIf="exibirUpload" class="btn-group" role="group" aria-label="...">
+                           <a id="visualizar-upload" href="javascript:void(0)" (click)="downloadAnexo()" class="btn btn-info btnAnexo">{{ arquivo.nome }}</a>
+                           <button type="button" class="btn btn-danger btnExcluir" (click)="excluirEdital()">
+                              X
+                           </button>
+                        </div>
+                        <a id="download-anexo" href="" download="{{ arquivo.nome }}"></a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+            <div class="card my-1 py-3">
+               <div class="form-row d-flex justify-content-between">
+                  <div class="form-group col-md-5">
+                     <button *ngIf="restaurar" type="submit" (click)="persistir()" [disabled]="cadastrarEditalForm.invalid" class="btn btn-success btn-lg btnSubmit">
+                        <span  class="ti-check"></span> Restaurar Edital
+                     </button>
+                     <button *ngIf="!atualizar && !restaurar" type="submit" (click)="persistir()" [disabled]="cadastrarEditalForm.invalid" class="btn btn-success btn-lg btnSubmit">
+                        <span  class="ti-check"></span> Cadastrar Edital
+                     </button>
+                     <button *ngIf="atualizar" type="submit" (click)="persistir()" [disabled]="cadastrarEditalForm.invalid" class="btn btn-success btn-lg btnSubmit">
+                        <span class="ti-check"></span> Alterar Edital
+                     </button>
+                     <button type="reset" class="btn btn-danger btn-lg btnSubmit"> Limpar </button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+</div>

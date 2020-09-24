@@ -1,0 +1,183 @@
+* {
+   padding: 0;
+   margin: 0;
+   box-sizing: border-box;
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.areatabela {
+   width: 90vw;
+}
+
+.card {
+   width: 100%;
+   max-height: 600px;
+   padding: 20px;
+   box-shadow: 0 8px 14px -6px black;
+}
+
+tbody tr:nth-child(even) {
+   background-color: lightcyan;
+}
+
+tbody tr:hover{
+   background-color: rgb(141, 141, 141);
+   cursor: pointer;
+}
+
+.etapa {
+   height: 50px;
+   font-size: 20px;
+   text-align: center;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.etapa span {
+   width: 40px;
+   height: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-left: 10px;
+   font-weight: 700;
+   border-radius: 50%;
+   font-size: 14pt;
+   color: #fff;
+}
+
+.tituloTabela {
+   width: 100%;
+   color: #fff;
+   padding: 2px;
+   text-align: center;
+}
+
+.ajusteTabelas{
+   width: 100%;
+   display: flex;
+}
+
+.tabela {
+   width: 100%;
+}
+
+tr th{
+   height: 36px;
+}
+
+tbody tr{
+   outline: none;
+}
+
+.iconeTopoTabela{
+   margin-right: 10px;
+   margin-left: 10px;
+   cursor: pointer;
+}
+
+thead tr th {
+   background-color: gainsboro;
+   text-align: center;
+   font-size: 12px;
+   padding: 2px 4px;
+}
+
+tbody tr td {
+   padding: 4px 4px;
+   font-size: 12px;
+   text-transform: uppercase;
+   text-align: center;
+   height: 45px;
+}
+
+.backgoundGerente {
+   background-color: mediumpurple;
+}
+
+.corGerente {
+   color: mediumpurple;
+}
+
+.backgoundDiretor {
+   background-color: rgb(35, 137, 233);
+}
+
+.corDiretor {
+   color: rgb(35, 137, 233);
+}
+
+.backgoundLicitacao {
+   background-color: rgb(34, 161, 66);
+}
+
+.corLicitacao {
+   color: rgb(34, 161, 66);
+}
+
+.backgoundAguardandoFinalizacao {
+   background-color: rgb(236, 146, 0);
+}
+
+.corAguardandoFinalizacao {
+   color: rgb(236, 146, 0);
+}
+
+.backgoundSuspenso {
+   background-color: orangered;
+}
+
+.scroll {
+   overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+   width: 10px;
+   background: #e3e0d6;
+   border-radius: 10px;
+}
+.scroll::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1);
+}
+.scroll::-webkit-scrollbar-thumb {
+   background: #8b8778;
+   border-radius: 10px;
+}
+
+.dropdown-toggle:after {
+   content: none;
+}
+
+.dropdown {
+   cursor: pointer;
+}
+
+.dropdownTd:hover .dropdownTd-menu {
+   display: inline-grid;
+   top: 34px;
+   grid-column-gap: 100px;
+   width: 200px;
+   min-width: 100%;
+}
+
+.dropdownTd-menu a {
+   font-weight: 500;
+   text-align: center;
+   padding: 6px 2px;
+   font-size: 12pt;
+}
+
+.dropdown-item:hover {
+   cursor: pointer;
+   background-color: #4096f8;
+}
+
+.botao-comentario{
+   outline: none;
+   border: none;
+   background: transparent;
+}

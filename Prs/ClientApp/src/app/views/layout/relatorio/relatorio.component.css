@@ -1,0 +1,170 @@
+* {
+   padding: 0;
+   margin: 0;
+   font-family: "Ubuntu", sans-serif;
+}
+
+.nameComponent {
+   border: 1px solid rgb(207, 207, 207);
+   border-radius: 5px;
+   width: 150px;
+   padding: 5px;
+   text-align: center;
+   box-shadow: 0 8px 6px -6px black;
+   margin-bottom: 15px;
+   color: rgb(3, 76, 192);
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.card {
+   width: 80vw;
+   box-shadow: 0 1px 8px -1px black;
+}
+
+legend {
+   padding: 0px 10px;
+   color: rgb(3, 76, 192);
+   font-size: 1.4rem;
+   cursor: pointer;
+   width: 22%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+hr {
+   margin-left: 10px;
+   width: 20%;
+   border: 1px solid rgb(0, 5, 75);
+   margin-bottom: 8px;
+}
+
+.active{
+   font-size: 0.9rem;
+}
+
+.form-control{
+   height: 30px;
+}
+
+.form-row {
+   padding: 5px 5px;
+}
+
+.botao {
+   font-size: 14pt;
+   border: none;
+   border-radius: 5px;
+   padding: 5px 10px;
+}
+
+.plus-edital {
+   cursor: pointer;
+}
+
+tbody tr:nth-child(even) {
+   background-color: lightcyan;
+}
+
+tbody tr:hover {
+   background-color: darkslategrey;
+   color: #fff;
+   cursor: pointer;
+}
+
+.etapa {
+   height: 50px;
+   font-size: 20px;
+   text-align: center;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.etapa span {
+   width: 40px;
+   height: 40px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-left: 10px;
+   font-weight: 700;
+   border-radius: 50%;
+   font-size: 14pt;
+   color: #fff;
+}
+
+.tituloTabela {
+   width: 100%;
+   color: #fff;
+   background-color: rgb(3, 76, 192);
+   padding: 2px;
+   text-align: center;
+}
+
+.tabela {
+   width: 100%;
+}
+
+thead tr th {
+   background-color: gainsboro;
+   text-align: center;
+   font-size: 13px;
+   cursor: pointer;
+}
+
+thead tr th:hover{
+   background-color: rgb(255, 80, 80);
+}
+
+tbody tr td {
+   text-align: center;
+   padding: 5px;
+   font-size: 12px;
+}
+
+.cardTags{
+   width: 100%;
+   margin-bottom: 10px;
+   background-color: rgba(0, 0, 0, 0.2);
+   border-radius: 5px;
+}
+
+ul{
+   display: flex;
+   flex-wrap: wrap;
+   padding-top: 10px;
+}
+
+.tabButton{
+   background-color: rgb(255, 80, 80);
+   padding: 6px 10px;
+   text-transform: uppercase;
+   margin: 0px 8px 10px 8px;
+   cursor: pointer;
+   list-style: none;
+   color: #fff;
+   border-radius: 5px;
+   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.6);
+   transition: 0.6s;
+}
+
+.tabButton:hover{
+   transform: scale(1.1);
+   background-color: rgb(47, 150, 219);
+}
+
+.blockForm{
+   background-color: rgb(236, 236, 236);
+   border-radius: 5px;
+   box-shadow: 0 1px 8px -1px rgba(0, 0, 0, 0.6);
+   margin-bottom: 6px;
+}
+
+.seta{
+   width: 20px;
+   height: 20px;
+}

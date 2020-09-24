@@ -1,0 +1,532 @@
+<article class="">
+   <div class="areatabela" *ngIf="tipo == 'gerente' && editais != undefined && editais.length> 0">
+      <div class="card d-flex justify-content-center align-items-center">
+         <div class="row d-flex justify-content-between tituloTabela backgoundGerente">
+            <div class="col-md-11 d-flex justify-content-center align-items-center">
+               AGUARDANDO PARECER {{titulo}} - ({{editais.length}})
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center">
+               <i [ngClass]="{'fa-expand': !tabelaExpandida, 'fa-compress': tabelaExpandida}" (click)="changeIconExpand()"
+                  data-toggle="collapse"
+                  data-target="#tabelaAguardandoGerente"
+                  aria-expanded="false"
+                  aria-controls="tabelaAguardandoGerente"
+                  class="fa iconeTopoTabela"></i>
+               <i class="fa fa-download iconeTopoTabela"></i>
+            </div>
+         </div>
+         <div id="tabelaAguardandoGerente" class="collapse" [ngClass]="{scroll: editais.length > 10}" style="width: 100%;">
+            <table border="1" class="tabela">
+               <thead>
+                  <tr>
+                     <th class="dropdown dropdownTd">
+                        <p id="id" data-toggle="dropdown">ID</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="id">
+                          <a class="dropdown-item" (click)="ordenarCrescente('id')" *ngIf="nomeColuna == '' || nomeColuna != 'id'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('id')" *ngIf="nomeColuna == 'id'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="cliente" data-toggle="dropdown">CLIENTE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="cliente">
+                          <a class="dropdown-item" (click)="ordenarCrescente('cliente')" *ngIf="nomeColuna == '' || nomeColuna != 'cliente'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('cliente')" *ngIf="nomeColuna == 'cliente'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>Nº EDITAL</th>
+                     <th>UASG</th>
+                     <th class="dropdown dropdownTd">
+                        <p id="categoria" data-toggle="dropdown">CATEGORIA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="categoria">
+                          <a class="dropdown-item" (click)="ordenarCrescente('categoria')" *ngIf="nomeColuna == '' || nomeColuna != 'categoria'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('categoria')" *ngIf="nomeColuna == 'categoria'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="regiao" data-toggle="dropdown">REGIÃO</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="regiao">
+                          <a class="dropdown-item" (click)="ordenarCrescente('regiao')" *ngIf="nomeColuna == '' || nomeColuna != 'regiao'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('regiao')" *ngIf="nomeColuna == 'regiao'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="dataAbertura" data-toggle="dropdown">DATA DE ABERTURA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="dataAbertura">
+                          <a class="dropdown-item" (click)="ordenarCrescente('dataAbertura')" *ngIf="nomeColuna == '' || nomeColuna != 'dataAbertura'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('dataAbertura')" *ngIf="nomeColuna == 'dataAbertura'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="modalidade" data-toggle="dropdown">MODALIDADE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="modalidade">
+                          <a class="dropdown-item" (click)="ordenarCrescente('modalidade')" *ngIf="nomeColuna == '' || nomeColuna != 'modalidade'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('modalidade')" *ngIf="nomeColuna == 'modalidade'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="portal" data-toggle="dropdown">PORTAL</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="portal">
+                          <a class="dropdown-item" (click)="ordenarCrescente('portal')" *ngIf="nomeColuna == '' || nomeColuna != 'portal'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('portal')" *ngIf="nomeColuna == 'portal'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="gerente" data-toggle="dropdown">GERENTE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="gerente">
+                          <a class="dropdown-item" (click)="ordenarCrescente('gerente')" *ngIf="nomeColuna == '' || nomeColuna != 'gerente'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('gerente')" *ngIf="nomeColuna == 'gerente'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>SLA</th>
+                     <th>COMENTÁRIO</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let edital of editais" (click)="emitirParecerGerente(edital)">
+                     <td>{{edital.id}}</td>
+                     <td>{{edital.cliente.apelido}}</td>
+                     <td>{{edital.numEdital}}</td>
+                     <td>{{edital.uasg}}</td>
+                     <td *ngIf="edital.categoria">{{edital.categoria.nome}}</td>
+                     <td *ngIf="!edital.categoria">--</td>
+                     <td>{{edital.regiao.nome}}</td>
+                     <td>{{edital.dataHoraDeAbertura | date:'dd/MM/yyyy HH:mm'}}</td>
+                     <td>{{edital.modalidade.nome}}</td>
+                     <td>{{edital.portal.nome}}</td>
+                     <td>{{edital.gerente.nome}}</td>
+                     <td *ngIf="edital.sla" placement="top" ngbTooltip="Tempo restante: {{edital.tempo}}" container="body" tooltipClass="tooltip">
+                        <img width="22px" height="22px" src="../../../../assets/images/slaok.png" />
+                     </td>
+                     <td *ngIf="!edital.sla" placement="top" ngbTooltip="Tempo de atraso: {{edital.tempo}}" container="body" tooltipClass="tooltip">
+                        <img width="22px" height="22px" src="../../../../assets/images/slanotok.png" />
+                     </td>
+                     <ng-template #hoverImgTemp>
+                        <li *ngIf="comentario">{{comentario.mensagem}}</li>
+                     </ng-template>
+                     <td (click)="obterComentarios(edital.id)" *ngIf="edital.id" (mouseenter)="obterUltimocomentario(edital.id)" placement="left" container="body" popoverTitle="Comentário" [ngbPopover]="hoverImgTemp" triggers="mouseenter:mouseleave">
+                        <a><button class="botao-comentario"><img width="26px" src="../../../../../assets/iconis/nota.png"/></button></a>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+   <div class="areatabela" *ngIf="tipo == 'diretor' && editais != undefined && editais.length > 0">
+      <div class="card d-flex justify-content-center align-items-center">
+         <div class="row d-flex justify-content-between tituloTabela backgoundDiretor">
+            <div class="col-md-11 d-flex justify-content-center align-items-center">
+               AGUARDANDO PARECER {{titulo}} - ({{editais.length}})
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center">
+               <i [ngClass]="{'fa-expand': !tabelaExpandida, 'fa-compress': tabelaExpandida}" (click)="changeIconExpand()"
+                  data-toggle="collapse"
+                  data-target="#tabelaAguardandoDiretor"
+                  aria-expanded="false"
+                  aria-controls="tabelaAguardandoDiretor"
+                  class="fa iconeTopoTabela"></i>
+               <i class="fa fa-download iconeTopoTabela"></i>
+            </div>
+         </div>
+         <div id="tabelaAguardandoDiretor" class="collapse" [ngClass]="{scroll: editais.length > 10}" style="width: 100%;">
+            <table border="1" class="tabela">
+               <thead>
+                  <tr>
+                     <th class="dropdown dropdownTd">
+                        <p id="id" data-toggle="dropdown">ID</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="id">
+                          <a class="dropdown-item" (click)="ordenarCrescente('id')" *ngIf="nomeColuna == '' || nomeColuna != 'id'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('id')" *ngIf="nomeColuna == 'id'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="cliente" data-toggle="dropdown">CLIENTE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="cliente">
+                          <a class="dropdown-item" (click)="ordenarCrescente('cliente')" *ngIf="nomeColuna == '' || nomeColuna != 'cliente'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('cliente')" *ngIf="nomeColuna == 'cliente'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>Nº EDITAL</th>
+                     <th>UASG</th>
+                     <th class="dropdown dropdownTd">
+                        <p id="categoria" data-toggle="dropdown">CATEGORIA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="categoria">
+                          <a class="dropdown-item" (click)="ordenarCrescente('categoria')" *ngIf="nomeColuna == '' || nomeColuna != 'categoria'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('categoria')" *ngIf="nomeColuna == 'categoria'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="regiao" data-toggle="dropdown">REGIÃO</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="regiao">
+                          <a class="dropdown-item" (click)="ordenarCrescente('regiao')" *ngIf="nomeColuna == '' || nomeColuna != 'regiao'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('regiao')" *ngIf="nomeColuna == 'regiao'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="dataAbertura" data-toggle="dropdown">DATA DE ABERTURA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="dataAbertura">
+                          <a class="dropdown-item" (click)="ordenarCrescente('dataAbertura')" *ngIf="nomeColuna == '' || nomeColuna != 'dataAbertura'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('dataAbertura')" *ngIf="nomeColuna == 'dataAbertura'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="modalidade" data-toggle="dropdown">MODALIDADE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="modalidade">
+                          <a class="dropdown-item" (click)="ordenarCrescente('modalidade')" *ngIf="nomeColuna == '' || nomeColuna != 'modalidade'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('modalidade')" *ngIf="nomeColuna == 'modalidade'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="portal" data-toggle="dropdown">PORTAL</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="portal">
+                          <a class="dropdown-item" (click)="ordenarCrescente('portal')" *ngIf="nomeColuna == '' || nomeColuna != 'portal'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('portal')" *ngIf="nomeColuna == 'portal'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="diretor" data-toggle="dropdown">DIRETOR</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="diretor">
+                          <a class="dropdown-item" (click)="ordenarCrescente('diretor')" *ngIf="nomeColuna == '' || nomeColuna != 'diretor'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('diretor')" *ngIf="nomeColuna == 'diretor'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>SLA</th>
+                     <th>COMENTÁRIO</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let edital of editais" (click)="emitirParecerDiretor(edital)">
+                     <td>{{edital.id}}</td>
+                     <td>{{edital.cliente.apelido}}</td>
+                     <td>{{edital.numEdital}}</td>
+                     <td>{{edital.uasg}}</td>
+                     <td *ngIf="edital.categoria">{{edital.categoria.nome}}</td>
+                     <td *ngIf="!edital.categoria">--</td>
+                     <td>{{edital.regiao.nome}}</td>
+                     <td>{{edital.dataHoraDeAbertura | date:'dd/MM/yyyy HH:mm'}}</td>
+                     <td>{{edital.modalidade.nome}}</td>
+                     <td>{{edital.portal.nome}}</td>
+                     <td *ngIf="tipo == 'diretor'">{{edital.diretor.nome}}</td>
+                     <td *ngIf="edital.sla" placement="top" ngbTooltip="Tempo restante: {{edital.tempo}}" container="body" tooltipClass="tooltip">
+                        <img width="22px" height="22px" src="../../../../assets/images/slaok.png" />
+                     </td>
+                     <td *ngIf="!edital.sla" placement="top" ngbTooltip="Tempo de atraso: {{edital.tempo}}" container="body" tooltipClass="tooltip">
+                        <img width="22px" height="22px" src="../../../../assets/images/slanotok.png" />
+                     </td>
+                     <ng-template #hoverImgTemp>
+                        <li *ngIf="comentario">{{comentario.mensagem}}</li>
+                     </ng-template>
+                     <td (click)="obterComentarios(edital.id)" *ngIf="edital.id" (mouseenter)="obterUltimocomentario(edital.id)" placement="left" container="body" [ngbPopover]="hoverImgTemp" triggers="mouseenter:mouseleave" popoverTitle="Comentário">
+                        <a><button class="botao-comentario"><img width="26px" src="../../../../../assets/iconis/nota.png"/></button></a>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+   <div class="areatabela" *ngIf="tipo == 'licitacao' && editais != undefined && editais.length > 0">
+      <div class="card d-flex justify-content-center align-items-center">
+         <div class="row d-flex justify-content-between tituloTabela backgoundLicitacao">
+            <div class="col-md-11 d-flex justify-content-center align-items-center">
+               {{titulo}} - ({{editais.length}})
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center">
+               <i [ngClass]="{'fa-expand': !tabelaExpandida, 'fa-compress': tabelaExpandida}" (click)="changeIconExpand()"
+                  data-toggle="collapse"
+                  data-target="#tabelaAguardandoLicitacao"
+                  aria-expanded="false"
+                  aria-controls="tabelaAguardandoLicitacao"
+                  class="fa iconeTopoTabela"></i>
+               <i class="fa fa-download iconeTopoTabela"></i>
+            </div>
+         </div>
+         <div id="tabelaAguardandoLicitacao" class="collapse" [ngClass]="{scroll: editais.length > 10}" style="width: 100%;">
+            <table border="1" class="tabela">
+               <thead>
+                  <tr>
+                     <th class="dropdown dropdownTd">
+                        <p id="id" data-toggle="dropdown">ID</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="id">
+                          <a class="dropdown-item" (click)="ordenarCrescente('id')" *ngIf="nomeColuna == '' || nomeColuna != 'id'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('id')" *ngIf="nomeColuna == 'id'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="cliente" data-toggle="dropdown">CLIENTE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="cliente">
+                          <a class="dropdown-item" (click)="ordenarCrescente('cliente')" *ngIf="nomeColuna == '' || nomeColuna != 'cliente'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('cliente')" *ngIf="nomeColuna == 'cliente'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>Nº EDITAL</th>
+                     <th>UASG</th>
+                     <th class="dropdown dropdownTd">
+                        <p id="categoria" data-toggle="dropdown">CATEGORIA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="categoria">
+                          <a class="dropdown-item" (click)="ordenarCrescente('categoria')" *ngIf="nomeColuna == '' || nomeColuna != 'categoria'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('categoria')" *ngIf="nomeColuna == 'categoria'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="regiao" data-toggle="dropdown">REGIÃO</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="regiao">
+                          <a class="dropdown-item" (click)="ordenarCrescente('regiao')" *ngIf="nomeColuna == '' || nomeColuna != 'regiao'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('regiao')" *ngIf="nomeColuna == 'regiao'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="dataAbertura" data-toggle="dropdown">DATA DE ABERTURA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="dataAbertura">
+                          <a class="dropdown-item" (click)="ordenarCrescente('dataAbertura')" *ngIf="nomeColuna == '' || nomeColuna != 'dataAbertura'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('dataAbertura')" *ngIf="nomeColuna == 'dataAbertura'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="modalidade" data-toggle="dropdown">MODALIDADE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="modalidade">
+                          <a class="dropdown-item" (click)="ordenarCrescente('modalidade')" *ngIf="nomeColuna == '' || nomeColuna != 'modalidade'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('modalidade')" *ngIf="nomeColuna == 'modalidade'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="portal" data-toggle="dropdown">PORTAL</p>
+                        <div class="dropdown-menu dropdownTd-menu" style="left: -52px;" aria-labelledby="portal">
+                          <a class="dropdown-item" (click)="ordenarCrescente('portal')" *ngIf="nomeColuna == '' || nomeColuna != 'portal'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('portal')" *ngIf="nomeColuna == 'portal'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>COMENTÁRIO</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let edital of editais" (click)="emitirParecerLicitacao(edital)">
+                     <td>{{edital.id}}</td>
+                     <td>{{edital.cliente.apelido}}</td>
+                     <td>{{edital.numEdital}}</td>
+                     <td>{{edital.uasg}}</td>
+                     <td *ngIf="edital.categoria">{{edital.categoria.nome}}</td>
+                     <td *ngIf="!edital.categoria">--</td>
+                     <td>{{edital.regiao.nome}}</td>
+                     <td>{{edital.dataHoraDeAbertura | date:'dd/MM/yyyy HH:mm'}}</td>
+                     <td>{{edital.modalidade.nome}}</td>
+                     <td>{{edital.portal.nome}}</td>
+                     <ng-template #hoverImgTemp>
+                        <li *ngIf="comentario">{{comentario.mensagem}}</li>
+                     </ng-template>
+                     <td (click)="obterComentarios(edital.id)" *ngIf="edital.id" (mouseenter)="obterUltimocomentario(edital.id)" placement="left" container="body" [ngbPopover]="hoverImgTemp" triggers="mouseenter:mouseleave" popoverTitle="Comentário">
+                        <a><button class="botao-comentario"><img width="26px" src="../../../../../assets/iconis/nota.png"/></button></a>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+   <div class="areatabela" *ngIf="tipo == 'AguardandoFinalizacao' && editais != undefined && editais.length > 0">
+      <div class="card d-flex justify-content-center align-items-center">
+         <div class="row d-flex justify-content-between tituloTabela backgoundAguardandoFinalizacao">
+            <div class="col-md-11 d-flex justify-content-center align-items-center">
+               {{titulo}} - ({{editais.length}})
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center">
+               <i [ngClass]="{'fa-expand': !tabelaExpandida, 'fa-compress': tabelaExpandida}" (click)="changeIconExpand()"
+                  data-toggle="collapse"
+                  data-target="#tabelaAcompanhar"
+                  aria-expanded="false"
+                  aria-controls="tabelaAcompanhar"
+                  class="fa iconeTopoTabela"></i>
+               <i class="fa fa-download iconeTopoTabela"></i>
+            </div>
+         </div>
+         <div id="tabelaAcompanhar" class="collapse" [ngClass]="{scroll: editais.length > 10}" style="width: 100%;">
+            <table border="1" class="tabela">
+               <thead>
+                  <tr>
+                     <th class="dropdown dropdownTd">
+                        <p id="id" data-toggle="dropdown">ID</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="id">
+                          <a class="dropdown-item" (click)="ordenarCrescente('id')" *ngIf="nomeColuna == '' || nomeColuna != 'id'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('id')" *ngIf="nomeColuna == 'id'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="cliente" data-toggle="dropdown">CLIENTE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="cliente">
+                          <a class="dropdown-item" (click)="ordenarCrescente('cliente')" *ngIf="nomeColuna == '' || nomeColuna != 'cliente'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('cliente')" *ngIf="nomeColuna == 'cliente'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>Nº EDITAL</th>
+                     <th>UASG</th>
+                     <th class="dropdown dropdownTd">
+                        <p id="categoria" data-toggle="dropdown">CATEGORIA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="categoria">
+                          <a class="dropdown-item" (click)="ordenarCrescente('categoria')" *ngIf="nomeColuna == '' || nomeColuna != 'categoria'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('categoria')" *ngIf="nomeColuna == 'categoria'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="regiao" data-toggle="dropdown">REGIÃO</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="regiao">
+                          <a class="dropdown-item" (click)="ordenarCrescente('regiao')" *ngIf="nomeColuna == '' || nomeColuna != 'regiao'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('regiao')" *ngIf="nomeColuna == 'regiao'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="dataAbertura" data-toggle="dropdown" style="width: 120px;">DATA DE ABERTURA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="dataAbertura">
+                          <a class="dropdown-item" (click)="ordenarCrescente('dataAbertura')" *ngIf="nomeColuna == '' || nomeColuna != 'dataAbertura'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('dataAbertura')" *ngIf="nomeColuna == 'dataAbertura'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="empresa" data-toggle="dropdown">EMPRESA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="empresa">
+                          <a class="dropdown-item" (click)="ordenarCrescente('empresa')" *ngIf="nomeColuna == '' || nomeColuna != 'empresa'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('empresa')" *ngIf="nomeColuna == 'empresa'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="nossoValor" data-toggle="dropdown" style="min-width: 90px;">NOSSO VALOR</p>
+                        <div class="dropdown-menu dropdownTd-menu" style="left: -96px;" aria-labelledby="nossoValor">
+                          <a class="dropdown-item" (click)="ordenarCrescente('nossoValor')" *ngIf="nomeColuna == '' || nomeColuna != 'nossoValor'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('nossoValor')" *ngIf="nomeColuna == 'nossoValor'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>COMENTÁRIO</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let edital of editais" (click)="emitirParecerLicitacaoFinalizar(edital)">
+                     <td>{{edital.id}}</td>
+                     <td>{{edital.cliente.apelido}}</td>
+                     <td>{{edital.numEdital}}</td>
+                     <td>{{edital.uasg}}</td>
+                     <td *ngIf="edital.categoria">{{edital.categoria.nome}}</td>
+                     <td *ngIf="!edital.categoria">--</td>
+                     <td *ngIf="edital.regiao">{{edital.regiao.nome}}</td>
+                     <td *ngIf="!edital.regiao">--</td>
+                     <td>{{edital.dataHoraDeAbertura | date:'dd/MM/yyyy HH:mm'}}</td>
+                     <td *ngIf="edital.empresa">{{edital.empresa.nome}}</td>
+                     <td *ngIf="!edital.empresa">--</td>
+                     <td *ngIf="edital.nossoValor">{{edital.nossoValor | currency : 'R$'}}</td>
+                     <td *ngIf="!edital.nossoValor">--</td>
+                     <ng-template #hoverImgTemp>
+                        <li *ngIf="comentario">{{comentario.mensagem}}</li>
+                     </ng-template>
+                     <td (click)="obterComentarios(edital.id)" *ngIf="edital.id" (mouseenter)="obterUltimocomentario(edital.id)" placement="left" container="body" [ngbPopover]="hoverImgTemp" triggers="mouseenter:mouseleave" popoverTitle="Comentário">
+                        <a><button class="botao-comentario"><img width="26px" src="../../../../../assets/iconis/nota.png"/></button></a>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+
+   <div class="areatabela" *ngIf="tipo == 'Suspenso' && editais != undefined && editais.length > 0">
+      <div class="card d-flex justify-content-center align-items-center">
+         <div class="row d-flex justify-content-between tituloTabela backgoundSuspenso">
+            <div class="col-md-11 d-flex justify-content-center align-items-center">
+               {{titulo}} - ({{editais.length}})
+            </div>
+            <div class="col-md-1 d-flex justify-content-center align-items-center">
+               <i [ngClass]="{'fa-expand': !tabelaExpandida, 'fa-compress': tabelaExpandida}" (click)="changeIconExpand()"
+                  data-toggle="collapse"
+                  data-target="#tabelaSuspenso"
+                  aria-expanded="false"
+                  aria-controls="tabelaSuspenso"
+                  class="fa iconeTopoTabela"></i>
+               <i class="fa fa-download iconeTopoTabela"></i>
+            </div>
+         </div>
+         <div id="tabelaSuspenso" class="collapse" [ngClass]="{scroll: editais.length > 10}" style="width: 100%;">
+            <table border="1" class="tabela">
+               <thead>
+                  <tr>
+                     <th class="dropdown dropdownTd">
+                        <p id="id" data-toggle="dropdown">ID</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="id">
+                          <a class="dropdown-item" (click)="ordenarCrescente('id')" *ngIf="nomeColuna == '' || nomeColuna != 'id'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('id')" *ngIf="nomeColuna == 'id'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="cliente" data-toggle="dropdown">CLIENTE</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="cliente">
+                          <a class="dropdown-item" (click)="ordenarCrescente('cliente')" *ngIf="nomeColuna == '' || nomeColuna != 'cliente'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('cliente')" *ngIf="nomeColuna == 'cliente'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>Nº EDITAL</th>
+                     <th>UASG</th>
+                     <th class="dropdown dropdownTd">
+                        <p id="categoria" data-toggle="dropdown">CATEGORIA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="categoria">
+                          <a class="dropdown-item" (click)="ordenarCrescente('categoria')" *ngIf="nomeColuna == '' || nomeColuna != 'categoria'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('categoria')" *ngIf="nomeColuna == 'categoria'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="regiao" data-toggle="dropdown">REGIÃO</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="regiao">
+                          <a class="dropdown-item" (click)="ordenarCrescente('regiao')" *ngIf="nomeColuna == '' || nomeColuna != 'regiao'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('regiao')" *ngIf="nomeColuna == 'regiao'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="dataAbertura" data-toggle="dropdown">DATA DE ABERTURA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="dataAbertura">
+                          <a class="dropdown-item" (click)="ordenarCrescente('dataAbertura')" *ngIf="nomeColuna == '' || nomeColuna != 'dataAbertura'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('dataAbertura')" *ngIf="nomeColuna == 'dataAbertura'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="empresa" data-toggle="dropdown">EMPRESA</p>
+                        <div class="dropdown-menu dropdownTd-menu" aria-labelledby="empresa">
+                          <a class="dropdown-item" (click)="ordenarCrescente('empresa')" *ngIf="nomeColuna == '' || nomeColuna != 'empresa'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('empresa')" *ngIf="nomeColuna == 'empresa'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th class="dropdown dropdownTd">
+                        <p id="nossoValor" data-toggle="dropdown">NOSSO VALOR</p>
+                        <div class="dropdown-menu dropdownTd-menu" style="left: -52px;" aria-labelledby="nossoValor">
+                          <a class="dropdown-item" (click)="ordenarCrescente('nossoValor')" *ngIf="nomeColuna == '' || nomeColuna != 'nossoValor'" type="button">Ordenar Crescente</a>
+                          <a class="dropdown-item" (click)="ordenarDeCrescente('nossoValor')" *ngIf="nomeColuna == 'nossoValor'" type="button">Ordenar Decrescente</a>
+                        </div>
+                     </th>
+                     <th>COMENTÁRIO</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <tr *ngFor="let edital of editais" (click)="alterarEdital(edital)">
+                     <td>{{edital.id}}</td>
+                     <td>{{edital.cliente.apelido}}</td>
+                     <td>{{edital.numEdital}}</td>
+                     <td>{{edital.uasg}}</td>
+                     <td *ngIf="edital.categoria">{{edital.categoria.nome}}</td>
+                     <td *ngIf="!edital.categoria">--</td>
+                     <td *ngIf="edital.regiao">{{edital.regiao.nome}}</td>
+                     <td *ngIf="!edital.regiao">--</td>
+                     <td>{{edital.dataHoraDeAbertura | date:'dd/MM/yyyy HH:mm'}}</td>
+                     <td *ngIf="edital.empresa">{{edital.empresa.nome}}</td>
+                     <td *ngIf="!edital.empresa">--</td>
+                     <td *ngIf="edital.nossoValor">{{edital.nossoValor | currency : 'R$'}}</td>
+                     <td *ngIf="!edital.nossoValor">--</td>
+                     <ng-template #hoverImgTemp>
+                        <li *ngIf="comentario">{{comentario.mensagem}}</li>
+                     </ng-template>
+                     <td (click)="obterComentarios(edital.id)" *ngIf="edital.id" (mouseenter)="obterUltimocomentario(edital.id)" placement="left" container="body" [ngbPopover]="hoverImgTemp" triggers="mouseenter:mouseleave" popoverTitle="Comentário">
+                        <a><button class="botao-comentario"><img width="26px" src="../../../../../assets/iconis/nota.png"/></button></a>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</article>

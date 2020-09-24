@@ -1,0 +1,186 @@
+<div class="container-flex scroll" style="overflow-x: hidden;">
+   <div class="row my-3 d-flex justify-content-around">
+      <div class="col-ms-6 col-md-2 d-flex justify-content-center">
+         <app-painel [titulo]="'TOTAL DE EDITAIS GANHOS'" [tipo]="'totaleditalganho'" [conteudo]="totalEditalGanhos">
+         </app-painel>
+      </div>
+      <div class="col-ms-6 col-md-2 d-flex justify-content-center">
+         <app-painel [titulo]="'TOTAL DE EDITAIS CADASTRADOS'" [tipo]="'totaledital'" [conteudo]="totalEdital">
+         </app-painel>
+      </div>
+      <div class="col-ms-6 col-md-2 d-flex justify-content-center">
+         <app-painel [titulo]="'TOTAL DE EDITAIS (GO)'" [tipo]="'totaleditalgo'" [conteudo]="totalEditalGo"></app-painel>
+      </div>
+      <div class="col-ms-6 col-md-2 d-flex justify-content-center">
+         <app-painel [titulo]="'TOTAL DE EDITAIS (NO GO)'" [tipo]="'totaleditalnogo'" [conteudo]="totalEditalNoGo">
+         </app-painel>
+      </div>
+      <div class="col-ms-6 col-md-2 d-flex justify-content-center">
+         <app-painel [titulo]="'TOTAL DE EDITAIS SUSPENSOS'" [tipo]="'totalsuspenso'" [conteudo]="totalEditalSuspenso"></app-painel>
+      </div>
+   </div>
+
+   <div class="row mt-5">
+      <div class="col-md-12">
+         <form class="d-flex justify-content-center align-items-center flex-column" [formGroup]="filtroForm">
+            <div *ngIf="!dadosForm" class="d-flex justify-content-center">
+               <div class="spinner-border text-primary" role="status">
+                 <span class="sr-only">Loading...</span>
+               </div>
+            </div>
+            <div class="card my-1 py-3" *ngIf="dadosForm">
+               <legend data-toggle="collapse" data-target="#edital" aria-expanded="false" aria-controls="edital" (click)="toogleCard()"><span>Filtros</span><img [src]="toogleSeta" class="seta"/></legend>
+               <hr/>
+               <div class="collapse blockForm mx-5 mt-2 px-3 py-2" id="edital">
+                  <div class="form-row d-flex justify-content-between">
+                     <div class="form-group col-md-2">
+                        <label class="active">ID</label>
+                        <input type="number" formControlName="id" name="id" class="form-control px-2">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Número do Edital</label>
+                        <input type="text" formControlName="numEdital" name="numEdital" class="form-control px-2">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Clientes</label>
+                        <select formControlName="cliente" class="form-control px-2" name="cliente">
+                           <option value=""  [selected]="true">--Selecione--</option>
+                           <option *ngFor="let cliente of dadosForm.clientes" value="{{ cliente.id }}">{{ cliente.apelido }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Data Abertura Edital (Inicio)</label>
+                        <input formControlName="dataAberturaEditalInicio" class="form-control px-2" placeholder="Selecione a data" type="date" name="dataAberturaEditalInicio">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Data Abertura Edital (Final)</label>
+                        <input type="date" formControlName="dataAberturaEditalFinal" class="form-control px-2" aria-describedby="Usuario" name="dataAberturaEditalFinal">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                  </div>
+                  <div class="form-row d-flex justify-content-between mt-2">
+                     <div class="form-group col-md-2">
+                        <label class="active">Modalidade</label>
+                        <select formControlName="modalidade" class="form-control px-2">
+                           <option value=""  [selected]="true">--Selecione--</option>
+                           <option *ngFor="let modalidade of dadosForm.modalidades" value="{{ modalidade.id }}">{{ modalidade.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Região</label>
+                        <select formControlName="regiao" class="form-control px-2">
+                           <option value=""  [selected]="true">--Selecione--</option>
+                           <option *ngFor="let regiao of dadosForm.regioes" value="{{ regiao.id }}">{{ regiao.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">UF</label>
+                        <select formControlName="estado" class="form-control px-2" placeholder="Selecione um Estado">
+                           <option value=""  [selected]="true">--Selecione--</option>
+                           <option *ngFor="let estado of dadosForm.estados" value="{{ estado.id }}">{{ estado.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-1">
+                        <label class="active">UASG</label>
+                        <input type="text" formControlName="uasg" class="form-control px-2" aria-describedby="Usuario" maxlength="20">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Consórcio</label>
+                        <select formControlName="consorcio" class="form-control px-2">
+                           <option value=""  [selected]="true">--Selecione--</option>
+                           <option value="Não">Não</option>
+                           <option value="Sim">Sim</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Portal</label>
+                       <select formControlName="portal" class="form-control">
+                          <option value=""  [selected]="true">--Selecione--</option>
+                          <option *ngFor="let portal of dadosForm.portais" value="{{ portal.id }}">{{ portal.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-row d-flex justify-content-start mt-2">
+                     <div class="form-group col-md-3">
+                        <label class="active">Valor Estimado (Inicio)</label>
+                        <input type="number" formControlName="valorEstimadoInicio" class="form-control px-2" aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Valor Estimado (Final)</label>
+                        <input type="number" formControlName="valorEstimadoFinal" class="form-control px-2" aria-describedby="Usuario" placeholder="R$ 0,00">
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Gerente de Contas</label>
+                        <select formControlName="gerenteDeContas" class="form-control px-2">
+                           <option value=""  [selected]="true">--Selecione--</option>
+                           <option *ngFor="let gerente of dadosForm.gerentes" value="{{ gerente.id }}">{{ gerente.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-3">
+                        <label class="active">Diretor Comercial</label>
+                        <select formControlName="diretorComercial" class="form-control px-2">
+                           <option value=""  [selected]="true">--Selecione--</option>
+                           <option *ngFor="let diretor of dadosForm.diretores" value="{{ diretor.id }}">{{ diretor.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-row d-flex justify-content-start mt-2">
+                     <div class="form-group col-md-3">
+                        <label class="active">Categoria</label>
+                        <select formControlName="categoria" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let categoria of dadosForm.categorias" value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                        </select>
+                     </div>
+                     <div class="form-group col-md-2">
+                        <label class="active">Bu</label>
+                        <select formControlName="bu" class="form-control px-2">
+                           <option value="" [selected]="true">--Selecione--</option>
+                           <option *ngFor="let bu of dadosForm.bus" value="{{ bu.id }}">{{ bu.nome }}</option>
+                        </select>
+                     </div>
+                  </div>
+                  <div class="form-row d-flex justify-content-end">
+                     <div class="btn-group" role="group">
+                        <button (click)="filtrar()" class="btn btn-info btn-lg botao">Filtrar</button>
+                        <button (click)="limparFiltros()" class="btn btn-warning btn-lg botao">Limpar</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+
+   <div class="row" *ngIf="exibirEtapa3">
+      <div class="col-ms-12 col-md-12 py-3 d-flex justify-content-center align-items-center">
+         <app-table [tipo]="'licitacao'" [titulo]="'PRÓXIMOS EDITAIS (GO)'" [etapa]="'3'" [editais]="editaisAguardandoLicitacao"></app-table>
+      </div>
+   </div>
+   <div class="row" *ngIf="exibirEtapa1">
+      <div class="col-ms-12 col-md-12 py-3 d-flex justify-content-center align-items-center">
+         <app-table [tipo]="'gerente'" [titulo]="'GERENTE DE CONTAS'" [etapa]="'1'" [editais]="editaisAguardandoGerente"></app-table>
+      </div>
+   </div>
+   <div class="row" *ngIf="exibirEtapa2">
+      <div class="col-ms-12 col-md-12 py-3 d-flex justify-content-center align-items-center">
+         <app-table [tipo]="'diretor'" [titulo]="'DIRETOR COMERCIAL'" [etapa]="'2'" [editais]="editaisAguardandoDiretor"></app-table>
+      </div>
+   </div>
+   <div class="row" *ngIf="exibirEtapa4">
+      <div class="col-ms-12 col-md-12 py-3 d-flex justify-content-center align-items-center">
+         <app-table [tipo]="'AguardandoFinalizacao'" [titulo]="'ACOMPANHAR'" [etapa]="'4'" [editais]="editaisAcompanhar"></app-table>
+      </div>
+   </div>
+   <div class="row" *ngIf="exibirSuspenso">
+      <div class="col-ms-12 col-md-12 py-3 d-flex justify-content-center align-items-center">
+         <app-table [tipo]="'Suspenso'" [titulo]="'SUSPENSOS'" [editais]="editaisSuspenso"></app-table>
+      </div>
+   </div>
+</div>

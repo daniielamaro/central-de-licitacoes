@@ -1,0 +1,51 @@
+<nav class="menu" [ngClass]="{esconderMenu: !alterar, scrollMenu: ativarScroll}">
+    <div class="botaoMenu" [ngClass]="{moverBotao: !alterar}" (click)="alterarMenu()">
+        <i class="{{iconi}}"></i>
+    </div>
+    <div class="logo d-flex align-items-center">
+        <img src="../../../assets/images/logocl.png"/>
+    </div>
+    <ul class="mt-2 list-group">
+        <a routerLink="/home" (click)="navegar()"><li class="itemMenu "><i class="fa fa-home fa-2x"></i><span>Home</span></li></a>
+        <a *ngIf="user.role.nome == 'administrador' || user.role.nome == 'licitacao'" routerLink="/relatorio" (click)="navegar()"><li class="itemMenu pl-2"><i class="fa fa-newspaper-o fa-2x"></i><span>Relatorio</span></li></a>
+        <a routerLink="/carteira" (click)="navegar()"><li class="itemMenu pl-2"><i class="fa fa-address-card fa-2x"></i><span>Carteira de Contas</span></li></a>
+        <a href="#" (click)="navegar()"><li class="itemMenu"><i class="fa fa-calendar fa-2x"></i><span>Calendario</span></li ></a>
+        <a href="/dissidios" (click)="navegar()"><li class="itemMenu pl-2"><i class="fa fa-laptop fa-2x"></i><span>Dissídios</span></li ></a>
+        <li class="itemMenu" data-toggle="collapse" href="#alterar" (click)="abrirDropdown(0)"><i class="fa fa-exchange fa-2x"></i><span class="tituloSeta">Alterar<i class="{{iconSetaAlt}} seta"></i></span></li>
+        <ul class="collapse" id="alterar">
+
+            <a href="/alterar-edital" (click)="navegar()"><li class="subMenu itemMenu"><span>Edital</span></li ></a>
+
+            <a *ngIf="user.role.nome == 'gerente' || user.role.nome == 'administrador'"
+                href="/alterar-parecer-gerente" (click)="navegar()" (click)="navegar()"><li class="subMenu itemMenu"><span>Parecer Gerente de Conta</span></li ></a>
+
+            <a routerLink="/alterar-parecer-diretor" *ngIf="user.role.nome == 'diretor' || user.role.nome == 'administrador'"
+                (click)="navegar()"><li class="subMenu itemMenu"><span>Parecer Diretor Comercial</span></li ></a>
+
+            <a *ngIf="user.role.nome == 'licitacao' || user.role.nome == 'administrador'"
+                routerLink="/alterar-parecer-licitacao" (click)="navegar()"><li class="subMenu itemMenu"><span>Parecer Licitação</span></li ></a>
+
+        </ul>
+        <a routerLink="/edital" (click)="navegar()"><li class="itemMenu"><i class="fa fa-pencil fa-2x"></i><span>Cadastrar Edital</span></li ></a>
+        <a *ngIf="user.role.nome == 'administrador' || user.role.nome == 'licitacao'" routerLink="/sla" (click)="navegar()"><li class="itemMenu"><i class="fa fa-clock-o fa-2x"></i><span>SLA's</span></li ></a>
+        <li class="itemMenu" data-toggle="collapse" href="#cadastro" (click)="!ativarScroll = ativarScroll; abrirDropdown(1)"><i class="fa fa-database fa-2x"></i><span class="tituloSeta">Cadastrar<i class="{{iconSetaCad}} seta"></i></span></li>
+        <ul class="collapse cadastrar itemMenu" id="cadastro">
+            <a *ngIf="user.role.nome == 'administrador'" href="/usuario" (click)="navegar()"><li class="subMenu itemMenu"><span>Usuario</span></li ></a>
+            <a routerLink="/categoria" (click)="navegar()"><li class="subMenu itemMenu"><span>Categoria</span></li ></a>
+            <a routerLink="/bu" (click)="navegar()"><li class="subMenu itemMenu"><span>BU</span></li></a>
+            <a *ngIf="user.role.nome == 'administrador'" routerLink="/cliente" (click)="navegar()"><li class="subMenu itemMenu"><span>Clientes</span></li ></a>
+            <a routerLink="/modalidade" (click)="navegar()"><li class="subMenu itemMenu"><span>Modalidade</span></li ></a>
+            <a href="#" (click)="navegar()"><li class="subMenu itemMenu"><span>Região</span></li ></a>
+            <a routerLink="/portal" (click)="navegar()"><li class="subMenu itemMenu"><span>Portal</span></li ></a>
+            <a routerLink="/concorrente" (click)="navegar()"><li class="subMenu itemMenu"><span>Concorrentes</span></li></a>
+            <a routerLink="/pre-venda" (click)="navegar()"><li class="subMenu itemMenu"><span>Pre Vendas</span></li></a>
+            <a routerLink="/motivo-perda" (click)="navegar()"><li class="subMenu itemMenu"><span>Motivo da Perda</span></li></a>
+            <a routerLink="/motivo-comum" (click)="navegar()"><li class="subMenu itemMenu"><span>Motivo Comum</span></li></a>
+        </ul>
+
+        <a href="/indicadores" (click)="navegar()"><li class="itemMenu"><i class="fa fa-pie-chart fa-2x"></i><span>Indicadores</span></li ></a>
+        <a href="/consultar-historico" (click)="navegar()"><li class="itemMenu"><i class="fa fa-history fa-2x"></i><span>Historico</span></li ></a>
+        <a *ngIf="user.role.nome == 'administrador'" href="#" (click)="navegar()"><li class="itemMenu "><i class="fa fa-cog fa-2x"></i><span>Configurações</span></li></a>
+    </ul>
+</nav>
+

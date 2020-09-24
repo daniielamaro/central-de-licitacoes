@@ -1,0 +1,84 @@
+<div class="container-fluid" id="bloco">
+   <div class="row mb-4">
+      <div class="col-md-12">
+         <form class="d-flex justify-content-center align-items-center flex-column" [formGroup]="concorrenteForm">
+            <div class="card my-1 py-3">
+               <a name="inicio"></a>
+               <legend>Cadastrar Concorrente</legend>
+               <hr />
+               <div class="form-row d-flex-md justify-content-around">
+                  <div class="form-group col-md-4 d-flex flex-column ">
+                     <label class="active">Nome</label>
+                     <input type="text" class="form-control px-2" formControlName="nome" #nome (keyup)="verificarConcorrente(nome.value)" (focusout)="exibirLista()" required>
+                     <div class="listaCliente p-0" *ngIf="exibirListagem" id="listagem">
+                        <ul class="list-group list-group-flush p-0">
+                          <li class="list-group-item p-2 listaNome" *ngFor="let concorrenteVerify of verifyConcorrente" (click)="selecionarConcorrente(concorrenteVerify)">{{ concorrenteVerify.nome.toUpperCase() }}</li>
+                        </ul>
+                     </div>
+                  </div>
+                  <div class="form-group col-md-3 d-flex flex-column ">
+                     <label class="active">Apelido</label>
+                     <input type="text" class="form-control px-2" formControlName="apelido">
+                  </div>
+                  <div class="form-group col-md-3 d-flex flex-column ">
+                     <label class="active">CNPJ</label>
+                     <input type="text" class="form-control px-2" formControlName="cnpj">
+                  </div>
+                  <div class="form-group col-md-2 d-flex flex-column " *ngIf="concorrente">
+                     <label class="active">Status</label>
+                     <div class="form-group col-md-12 ml-2">
+                        <div class="form-check radio">
+                           <input class="" type="radio" formControlName="ativo" name="ativo" value="true">
+                           <span class="ml-2">Ativo</span>
+                        </div>
+                        <div class="form-check radio">
+                           <input class="" type="radio" formControlName="ativo" name="ativo" value="false">
+                           <span class="ml-2">Desativar</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="form-row d-flex justify-content-end mt-4">
+                  <div class="btn-group">
+                     <button class="btn btn-success botao" (click)="cadastrarConcorrente()" [disabled]="!concorrenteForm.valid || concorrenteId">Cadastrar</button>
+                     <button class="btn btn-warning botao" (click)="alterarConcorrente()" [disabled]="!concorrenteId">Alterar</button>
+                     <button class="btn btn-danger botao" (click)="limpar()">Limpar</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+   <div class="row">
+      <div class="areatabela d-flex justify-content-center align-items-center">
+         <div class="card cardScroll d-flex justify-content-center align-items-center">
+            <div class="tituloTabela">Concorrente</div>
+            <div class="d-flex justify-content-center mt-3" *ngIf="!concorrentes">
+               <div class="spinner-border text-primary" role="status">
+                  <span class="sr-only">Loading...</span>
+               </div>
+            </div>
+            <div [ngClass]="{scroll: concorrentes.length > 15}" style="width: 100%;" *ngIf="concorrentes">
+               <table border="1" class="tabela">
+                  <thead>
+                     <tr>
+                        <th>NOME</th>
+                        <th>APELIDO</th>
+                        <th class="px-4">STATUS</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr *ngFor="let concorrente of concorrentes" (click)="selecionarConcorrente(concorrente)">
+                        <td>{{concorrente.nome.toUpperCase()}}</td>
+                        <td>{{concorrente.apelido.toUpperCase()}}</td>
+                        <td class="status" *ngIf="concorrente.ativo == true">Ativado</td>
+                        <td class="status" *ngIf="concorrente.ativo == false" style="color: red;">Desativado</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

@@ -1,0 +1,132 @@
+<div class="container-fluid pb-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="nameComponent">
+                <h3 class="">Usuario</h3>
+            </div>
+
+            <div class="card-end">
+               <form class="d-flex justify-content-center align-items-center flex-column" (ngSubmit)="cadastrarUsuario()" [formGroup]="cadastrarUsuarioForm">
+                  <div class="card my-1 py-3">
+                      <legend>Cadastrar Novo Usuario<hr/></legend>
+                      <div class="form-row d-flex justify-content-between">
+                          <div class="form-group col-md-8">
+                              <label class="active">Email</label>
+                              <input type="text" formControlName="email" name="email" class="form-control px-2" required>
+                              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                          </div>
+                          <div *ngIf="roles" class="form-group col-md-4">
+                              <label class="active">Função</label>
+                              <select formControlName="role" class="form-control px-2" name="role" required>
+                                  <option value="">--Selecione--</option>
+                                  <option *ngFor="let role of roles" value="{{ role.id }}">{{ role.nome }}</option>
+                              </select>
+                          </div>
+                      </div>
+                      <div class="form-row d-flex justify-content-between">
+                          <div class="form-group col-md-12">
+                             <div class="btn-group">
+                                <button type="submit" [disabled]="cadastrarUsuarioForm.invalid" class="btn btn-success btn-lg botao">
+                                    <span class="ti-check"></span> Cadastrar
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-lg botao">Limpar</button>
+                             </div>
+                          </div>
+                      </div>
+                  </div>
+               </form>
+
+               <form class="d-flex justify-content-center align-items-center flex-column" [formGroup]="alterarUsuarioForm">
+                  <div class="card my-1 py-3">
+                        <legend>Alterar Usuario<hr/></legend>
+                        <div class="form-row d-flex justify-content-between">
+                           <div class="form-group col-md-4">
+                              <label class="active">Email</label>
+                              <input type="text" formControlName="email" name="email" class="form-control px-2" required>
+                              <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                           </div>
+                           <div class="form-group col-md-4">
+                              <label class="active">Função</label>
+                              <select formControlName="role" class="form-control px-2" name="role" required>
+                                 <option value="">--Selecione--</option>
+                                 <option *ngFor="let role of roles" value="{{ role.id }}">{{ role.nome }}</option>
+                             </select>
+                           </div>
+                           <div class="form-group col-md-4">
+                              <label class="active">Status</label>
+                              <select formControlName="status" class="form-control px-2" name="role" required>
+                                 <option value="">--Selecione--</option>
+                                 <option value='true'>Ativo</option>
+                                 <option value='false'>Desativado</option>
+                             </select>
+                           </div>
+                        </div>
+                        <div class="form-row">
+                           <div class="form-group col-md-12 d-flex justify-content-end">
+                              <div class="btn-group">
+                                 <button (click)="alterarUsuario()" [disabled]="alterarUsuarioForm.invalid" class="btn btn-warning botao">
+                                    Alterar
+                                 </button>
+                                 <button type="reset" class="btn btn-danger botao">Limpar</button>
+                              </div>
+                           </div>
+                        </div>
+                  </div>
+               </form>
+            </div>
+
+            <div *ngIf="solicitacoes" class="d-flex justify-content-center align-items-center flex-column">
+                <div class="card my-1 py-3">
+                    <legend>Solicitações de cadastro<hr/></legend>
+                    <div class="form-row d-flex justify-content-around">
+                        <div *ngFor="let solicitacao of solicitacoes" class="col-md-4 solicitacao">
+                            <div class="col-md-12">
+                                <label class="tituloSetorSolicitacao">Nome:</label>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="descricaoSetorSolicitacao">{{solicitacao.name}}</div>
+                            </div><br/>
+
+                            <div class="col-md-12">
+                                <label class="tituloSetorSolicitacao">Email:</label>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="descricaoSetorSolicitacao">{{solicitacao.email}}</div>
+                            </div><br/>
+
+                            <div class="col-md-12">
+                                <label class="tituloSetorSolicitacao">Motivo: </label>
+                            </div>
+                            <div class="col-md-12 descricaoSetorSolicitacao">
+                                <div>{{solicitacao.motivo}}</div>
+                            </div><br/>
+
+                            <div class="col-md-12">
+                                <label class="tituloSetorSolicitacao">Função: </label>
+                            </div>
+                            <div class="col-md-12">
+                                <select class="form-control px-2" name="funcao" id="{{'funcSolicitacao'+solicitacao.id}}" required>
+                                    <option value="" [disabled]="true" [selected]="true">--Selecione--</option>
+                                    <option *ngFor="let role of roles" value="{{ role.id }}">{{ role.nome }}</option>
+                                 </select>
+                            </div><br/>
+
+                            <div class="form-row d-flex justify-content-between">
+                                <div class="form-group col-md-12">
+                                    <div class="btn-group">
+                                       <button (click)="autorizar(solicitacao.id)" class="btn btn-success btn-lg botao">
+                                          <span class="ti-check"></span> Autorizar
+                                       </button>
+                                       <button (click)="naoAutorizar(solicitacao.id)" class="btn btn-danger btn-lg botao">Não Autorizar</button>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+       </div>
+    </div>
+ </div>

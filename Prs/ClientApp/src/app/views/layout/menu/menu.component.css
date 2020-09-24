@@ -1,0 +1,127 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.menu {
+   width: 250px;
+   height: 100vh;
+   box-shadow: 5px 1px 10px rgba(0, 0, 0, 0.4);
+   transition: 0.4s;
+   overflow-x: hidden;
+   background-color: #fff;
+   position: fixed;
+   z-index: 1;
+}
+
+.scrollMenu {
+   overflow-y: scroll;
+}
+
+.logo {
+   padding: 7px;
+   height: 60px;
+   border-bottom: 1px solid #cccccc;
+}
+
+.logo img {
+   height: 42px;
+}
+
+.menu i,
+span {
+   color: green;
+}
+
+a {
+   text-decoration: none;
+   color: black;
+}
+
+li {
+   padding: 7px 10px 7px 10px;
+   width: 250px;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+}
+
+.tituloSeta {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+}
+
+.tituloSeta .seta {
+   font-size: 16pt;
+   margin-right: 4px;
+}
+
+li:hover {
+   background-color: green;
+}
+
+li:hover span,
+li:hover i {
+   color: #fff;
+}
+
+.botaoMenu {
+   position: fixed;
+   left: 260px;
+   top: 10px;
+   border-radius: 5px;
+   background-color: #fff;
+   padding: 2px;
+   box-shadow: 5px 1px 10px rgba(0, 0, 0, 0.4);
+   cursor: pointer;
+   transition: 0.4s;
+   width: 40px;
+   height: 40px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.botaoMenu:hover {
+   transition: 0.4s;
+   background-color: green;
+}
+
+.botaoMenu:hover i {
+   color: #fff;
+}
+
+.itemMenu span {
+   font-size: 12pt;
+   margin-left: 16px;
+}
+
+.esconderMenu {
+   width: 50px;
+   transition: 0.4s;
+}
+
+.moverBotao {
+   left: 60px;
+   transition: 0.4s;
+}
+
+.subMenu {
+   padding-left: 38px;
+}
+
+.menu::-webkit-scrollbar {
+   width: 10px;
+   background: #e3e0d6;
+}
+.menu::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1);
+}
+.menu::-webkit-scrollbar-thumb {
+   background: #8b8778;
+}

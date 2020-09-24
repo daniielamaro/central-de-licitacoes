@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.borda{
+    border: 1px solid black;
+}
+
+
+.card{
+    width: 210px;
+    text-align: center;
+    border: 1px solid rgb(226, 226, 226);
+    box-shadow: 0 8px 6px -6px black;
+}
+
+.header{
+    background-color: rgb(197, 111, 255);
+    padding: 0px 24px;
+    height: 48px;
+    font-size: 12pt;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content{
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content p{
+   font-size: 20pt;
+}
+
+.fundovermelho{
+  background-color: crimson;
+}
+
+.fundoverde{
+  background-color: green;
+}
+
+.fundoazul{
+  background-color: blue;
+}
+
+.fundolaranja{
+  background-color: orangered;
+}
+
+.fundoroxo{
+  background-color: purple;
+}
+

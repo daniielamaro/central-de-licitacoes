@@ -1,0 +1,40 @@
+* {
+   margin: 0;
+   padding: 0;
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+.header {
+   height: 60px;
+   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.iconi img {
+   width: 50px;
+   cursor: pointer;
+}
+
+.nome {
+   padding: 5px;
+}
+
+.menuUsuario{
+   top: 60px;
+   right: 2px;
+   position: absolute;
+   z-index: 1;
+}
+
+.menuUsuario li{
+   text-align: center;
+   padding: 8px 16px;
+   cursor: pointer;
+}
+
+.menuUsuario li:hover{
+   background: rgb(29, 162, 250);
+   color: #ffffff;
+}

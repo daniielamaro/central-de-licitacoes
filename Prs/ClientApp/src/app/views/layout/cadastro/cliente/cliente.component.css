@@ -1,0 +1,130 @@
+* {
+   padding: 0;
+   margin: 0;
+}
+
+.borda {
+   border: 1px solid black;
+}
+
+legend {
+   padding: 0px 10px;
+   color: rgb(3, 76, 192);
+}
+
+hr {
+   margin-left: 10px;
+   width: 20%;
+   border: 1px solid rgb(0, 5, 75);
+   margin-bottom: 20px;
+}
+
+.botao {
+   font-size: 14pt;
+   border: none;
+   border-radius: 5px;
+   padding: 0px 10px;
+   height: 40px;
+}
+
+.areatabela {
+   width: 100%;
+}
+
+.listaCliente {
+   width: 100%;
+   border-radius: 2px;
+   position: absolute;
+   margin-top: 62px;
+   right: 1px;
+   z-index: 1;
+   max-height: 18rem;
+   overflow-y: scroll;
+   cursor: pointer;
+   border: 1px solid rgb(228, 228, 228);
+   border-radius: 5px;
+}
+
+.listaCliente::-webkit-scrollbar {
+   width: 0px;
+   overflow: hidden;
+}
+.listaCliente::-webkit-scrollbar-track {
+   overflow: hidden;
+}
+.listaCliente::-webkit-scrollbar-thumb {
+   overflow: hidden;
+}
+
+.listaNome:hover {
+   background-color: rgb(87, 174, 255);
+}
+
+.card {
+   width: 80vw;
+   padding: 20px;
+   box-shadow: 0 8px 14px -6px black;
+}
+
+.cardScroll {
+   max-height: 600px;
+}
+
+tbody tr:nth-child(even) {
+   background-color: lightcyan;
+}
+
+tbody tr:hover {
+   background-color: darkslategrey;
+   color: #fff;
+   cursor: pointer;
+}
+
+.tituloTabela {
+   width: 100%;
+   color: #fff;
+   padding: 2px;
+   text-align: center;
+   background-color: blueviolet;
+}
+
+.tabela {
+   width: 100%;
+}
+
+thead tr th {
+   background-color: gainsboro;
+   text-align: center;
+   font-size: 14px;
+}
+
+tbody tr td {
+   padding: 5px;
+   font-size: 14px;
+}
+
+.status {
+   text-transform: uppercase;
+}
+
+.red {
+   background-color: red;
+   color: #fff;
+}
+
+.scroll{
+   overflow-y: scroll;
+}
+
+.scroll::-webkit-scrollbar {
+   width: 10px;
+   background: #e3e0d6;
+   border-radius: 10px;
+}
+.scroll::-webkit-scrollbar-track {
+   background: rgba(0, 0, 0, 0.1);
+}
+.scroll::-webkit-scrollbar-thumb {
+   background: #8b8778;
+   border-radius: 10px;
+}

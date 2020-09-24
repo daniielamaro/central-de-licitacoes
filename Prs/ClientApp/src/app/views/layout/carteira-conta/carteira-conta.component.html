@@ -1,0 +1,74 @@
+<div class="container-fluid d-flex align-items-center flex-column">
+   <div class="row">
+      <div class="col-md-12 mb-3">
+         <form class="formulario" [formGroup]="carteiraForm" *ngIf="dadosForm">
+            <div class="card my-1 py-3">
+               <legend>Consolidar</legend>
+               <hr />
+               <div class="form-row d-flex-md justify-content-start px-2">
+                  <div class="form-group col-md-12 d-flex flex-column" *ngIf="dadosForm">
+                     <label class="active">Gerente de Conta</label>
+                     <select formControlName="gerente" class="form-control">
+                        <option value="0">Nenhum</option>
+                        <option *ngFor="let gerente of dadosForm.gerentes" value="{{ gerente.id }}">
+                           {{ gerente.nome.toUpperCase() }}</option>
+                     </select>
+                  </div>
+               </div>
+               <div class="form-row d-flex-md justify-content-between px-2">
+                  <div class="form-group col-md-12 d-flex flex-column ">
+                     <label class="active">Cliente</label>
+                     <select formControlName="cliente" class="form-control">
+                        <option value="" [disabled]="true">--Selecione--</option>
+                        <option *ngFor="let cliente of dadosForm.clientes" value="{{ cliente.id }}">
+                           {{ cliente.apelido.toUpperCase() }}</option>
+                     </select>
+                  </div>
+               </div>
+
+               <div class="form-row col-md-12 d-flex justify-content-between px-3 mt-4">
+                  <button class="btn btn-success botao" [disabled]="!carteiraForm.valid" (click)="registrar()">Marcar</button>
+
+                  <div class="btn-group" role="group" aria-label="Basic example">
+                     <button class="btn btn-primary botao" (click)="filtrar()">Filtrar</button>
+                     <button class="btn btn-danger botao" (click)="limparFiltros()">Limpar</button>
+                     <button class="btn btn-warning botao" (click)="excluirGerente()" [disabled]="!idGerente">Excluir</button>
+                  </div>
+               </div>
+            </div>
+         </form>
+      </div>
+   </div>
+
+   <div class="row">
+      <div class="col-3">
+         <div *ngIf="!dados" class="d-flex justify-content-center mt-4">
+            <div class="spinner-border text-primary" role="status">
+               <span class="sr-only">Loading...</span>
+            </div>
+         </div>
+         <div class="nav flex-column nav-pills blocoBotao" *ngIf="dados" id="v-pills-tab" role="tablist"
+            aria-orientation="vertical">
+            <a *ngFor="let dado of dados" class="btn btn-outline-primary botaoLink" id="{{'tab-'+dado.gerente.id}}"
+               data-toggle="pill" [href]="'#gerente'+dado.gerente.id" role="tab"
+               [attr.aria-controls]="'gerente'+dado.gerente.id" aria-selected="false" (click)="pegarId(dado.gerente.id)">{{dado.gerente.nome}} - ({{dado.carteiras.length}})</a>
+         </div>
+      </div>
+      <div class="col-9">
+         <div class="tab-content" id="v-pills-tabContent">
+            <div *ngFor="let dado of dados" class="tab-pane fade blocoCarteira" id="{{'gerente'+dado.gerente.id}}"
+               role="tabpanel" [attr.aria-labelledby]="'tab-'+dado.gerente.id">
+               <ul class="blocoLinha">
+                  <li *ngFor="let carteira of dado.carteiras" [ngClass]="{destacar: carteira.temosContrato == true}"
+                     class="d-flex justify-content-between py-1 px-2 linha">
+                     <span>{{carteira.cliente.nome}}</span>
+                     <i class="fa fa-trash excluir" (click)="deletar(carteira.id)" data-toggle="tooltip"
+                        data-placement="right" title="Excluir">
+                     </i>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
