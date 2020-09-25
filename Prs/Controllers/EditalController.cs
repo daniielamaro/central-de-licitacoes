@@ -222,9 +222,9 @@ namespace Prs.Controllers
                 .Where(x => x.Ativo && x.Id == edital.DiretorId)
                 .SingleOrDefault();
 
-            /*EmailService.EnviarEmailNotificacaoSobreEdital(gerente.Nome, gerente.Email, editalNew, "Assunto: Prezado GC – " + gerente.Nome + " favor emitir parecer para o Edital: ID " + editalNew.Id + " - " + editalNew.Cliente.Nome + " - " + editalNew.Modalidade.Nome + " - " + editalNew.NumEdital + " - " + editalNew.Cliente.Nome + " - " + editalNew.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));
+            EmailService.EnviarEmailNotificacaoSobreEdital(gerente.Nome, gerente.Email, editalNew, "Assunto: Prezado GC – " + gerente.Nome + " favor emitir parecer para o Edital: ID " + editalNew.Id + " - " + editalNew.Cliente.Nome + " - " + editalNew.Modalidade.Nome + " - " + editalNew.NumEdital + " - " + editalNew.Cliente.Nome + " - " + editalNew.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));
             EmailService.EnviarEmailNotificacaoSobreEdital(diretor.Nome, diretor.Email, editalNew, "Assunto: Prezado GC – " + gerente.Nome + " favor emitir parecer para o Edital: ID " + editalNew.Id + " - " + editalNew.Cliente.Nome + " - " + editalNew.Modalidade.Nome + " - " + editalNew.NumEdital + " - " + editalNew.Cliente.Nome + " - " + editalNew.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));
-            EmailService.EnviarEmailNotificacaoSobreEdital("Equipe de Licitação", "licita@globalweb.com.br", editalNew, "Assunto: Prezado GC – " + gerente.Nome + " favor emitir parecer para o Edital: ID " + editalNew.Id + " - " + editalNew.Cliente.Nome + " - " + editalNew.Modalidade.Nome + " - " + editalNew.NumEdital + " - " + editalNew.Cliente.Nome + " - " + editalNew.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));*/
+            EmailService.EnviarEmailNotificacaoSobreEdital("Equipe de Licitação", "licita@globalweb.com.br", editalNew, "Assunto: Prezado GC – " + gerente.Nome + " favor emitir parecer para o Edital: ID " + editalNew.Id + " - " + editalNew.Cliente.Nome + " - " + editalNew.Modalidade.Nome + " - " + editalNew.NumEdital + " - " + editalNew.Cliente.Nome + " - " + editalNew.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));
 
             await historicoRepository.CriarHistorico("Edital criado", edital.ResponsavelRequestId, editalNew.Id);
 
@@ -280,9 +280,9 @@ namespace Prs.Controllers
                 .Where(x => x.Ativo && x.Id == edital.DiretorId)
                 .SingleOrDefault();
 
-            /*EmailService.EnviarEmailNotificacaoAlteracaoEdital(gerente.Nome, gerente.Email, editalUpdate, "Alteração! Edital: ID" + editalUpdate.Id);
+            EmailService.EnviarEmailNotificacaoAlteracaoEdital(gerente.Nome, gerente.Email, editalUpdate, "Alteração! Edital: ID" + editalUpdate.Id);
             EmailService.EnviarEmailNotificacaoAlteracaoEdital(diretor.Nome, diretor.Email, editalUpdate, "Alteração! Edital: ID" + editalUpdate.Id);
-            EmailService.EnviarEmailNotificacaoAlteracaoEdital("Equipe de Licitação", "licita@globalweb.com.br", editalUpdate, "Alteração! Edital: ID" + editalUpdate.Id);*/
+            EmailService.EnviarEmailNotificacaoAlteracaoEdital("Equipe de Licitação", "licita@globalweb.com.br", editalUpdate, "Alteração! Edital: ID" + editalUpdate.Id);
 
             return Ok(editalUpdate);
         }
@@ -331,7 +331,7 @@ namespace Prs.Controllers
                 .Where(x => x.Ativo && x.Id == edital.GerenteId)
                 .SingleOrDefault();
 
-            /*EmailService.EnviarEmailNotificacaoAlteracaoEdital(gerente.Nome, gerente.Email, editalUpdate);*/
+            EmailService.EnviarEmailNotificacaoAlteracaoEdital(gerente.Nome, gerente.Email, editalUpdate);
 
             return Ok(editalUpdate);
         }
