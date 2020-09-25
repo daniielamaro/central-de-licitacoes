@@ -10,8 +10,8 @@ namespace Infrastructure.Repository.CarteiraConta.GetFormCarteiraConta
         {
             using var context = new ApiContext();
 
-            var gerentes = await context.Usuarios.AsNoTracking().Where(x => x.Role.Id == 4 || x.Role.Id == 1).Where(x => x.Ativo).ToListAsync();
-            var clientes = await context.Clientes.AsNoTracking().Where(x => x.Ativo).ToListAsync();
+            var gerentes = await context.Usuarios.AsNoTracking().Where(x => x.Role.Id == 4 || x.Role.Id == 1).Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
+            var clientes = await context.Clientes.AsNoTracking().Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
 
             return new
             {

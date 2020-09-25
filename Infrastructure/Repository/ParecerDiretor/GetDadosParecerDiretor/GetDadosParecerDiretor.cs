@@ -10,9 +10,9 @@ namespace Infrastructure.Repository.ParecerDiretor.GetDadosParecerDiretor
         {
             using var context = new ApiContext();
 
-            var gerente = await context.Usuarios.AsNoTracking().Where(x => x.Ativo).ToListAsync();
-            var empresas = await context.Empresas.AsNoTracking().Where(x => x.Ativo).ToListAsync();
-            var motivos = await context.MotivosComuns.AsNoTracking().Where(x => x.Ativo).ToListAsync();
+            var gerente = await context.Usuarios.AsNoTracking().Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
+            var empresas = await context.Empresas.AsNoTracking().Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
+            var motivos = await context.MotivosComuns.AsNoTracking().Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
 
             return new
             {
