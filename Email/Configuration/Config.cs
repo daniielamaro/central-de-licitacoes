@@ -2,8 +2,8 @@
 {
     public static class Config
     {
-        //public static string Host = "mtadc4.grupotba.intra.corp";
-        public static string Host = "10.11.100.93";
+        public static string Host = "mtadc4.grupotba.intra.corp";
+        //public static string Host = "10.11.100.93";
         public static int Port = 26;
         public static string User = "";
         public static string Pass = "";
