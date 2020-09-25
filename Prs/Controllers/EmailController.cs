@@ -14,11 +14,11 @@ namespace Prs.Controllers
     [Route("[controller]")]
     public class EmailController : ControllerBase
     {
-        [HttpPost("Teste")]
+        [HttpGet]
         [AllowAnonymous]
-        public IActionResult Teste(string email)
+        public IActionResult Get(string email)
         {
-            EmailService.EnviarCustom("Usuario",email,"testando email CL", "testando email CL");
+            EmailService.EnviarCustom("Daniel Amaro",email,"testando email CL", "testando email CL");
 
             return Ok("Email enviado com sucesso!");
         }
