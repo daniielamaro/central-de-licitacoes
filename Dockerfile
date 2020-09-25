@@ -37,7 +37,7 @@ RUN npm install -g @angular/cli --unsafe
 
 COPY Prs/ClientApp/. /usr/src/app
 
-RUN npm run build
+RUN npm run build -- --prod
 
 #End Angular build
 
