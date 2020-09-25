@@ -17,8 +17,8 @@ namespace Infrastructure.Repository.Edital.GetDadosCadastrarEdital
             var portais = await context.Portais.AsNoTracking().Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
             var categorias = await context.Categorias.AsNoTracking().Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
             var bus = await context.Bus.AsNoTracking().Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
-            var gerentes = await context.Usuarios.AsNoTracking().Where(x => x.Role.Id == 4 || x.Role.Id == 1).Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
-            var diretores = await context.Usuarios.AsNoTracking().Where(x => x.Role.Id == 3 || x.Role.Id == 4 || x.Role.Id == 1).OrderBy(x => x.Nome).Where(x => x.Ativo).ToListAsync();
+            var gerentes = await context.Usuarios.AsNoTracking().Where(x => x.Role.Id == 4 || x.Role.Id == 3 || x.Role.Id == 2 || x.Role.Id == 1).Where(x => x.Ativo).OrderBy(x => x.Nome).ToListAsync();
+            var diretores = await context.Usuarios.AsNoTracking().Where(x => x.Role.Id == 3 || x.Role.Id == 2 || x.Role.Id == 1).OrderBy(x => x.Nome).Where(x => x.Ativo).ToListAsync();
 
             return new
             {
