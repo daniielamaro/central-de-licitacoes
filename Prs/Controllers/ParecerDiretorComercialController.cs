@@ -101,10 +101,10 @@ namespace Prs.Controllers
 
             await historicoRepository.CriarHistorico("Parecer diretor comercial criado", parecerDiretor.ResponsavelRequestId, parecer.Edital.Id);
 
-            if (parecer.Decisao == "GO")
+            /*if (parecer.Decisao == "GO")
                 EmailService.EnviarEmailNotificacaoSobreEdital("Equipe de Licitação", "licita@globalweb.com.br", parecer.Edital, "Assunto: Equipe de Licitação, favor emitir parecer para o Edital: ID " + parecer.Edital.Id + " - " + parecer.Edital.Cliente.Nome + " - " + parecer.Edital.Modalidade.Nome + " - " + parecer.Edital.NumEdital + " - " + parecer.Edital.Cliente.Nome + " - " + parecer.Edital.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture), "GO");
             else
-                EmailService.EnviarEmailNotificacaoSobreEdital("Equipe de Licitação", "licita@globalweb.com.br", parecer.Edital, "Assunto: Equipe de Licitação, Edital Definido como NO GO: ID " + parecer.Edital.Id + " - " + parecer.Edital.Cliente.Nome + " - " + parecer.Edital.Modalidade.Nome + " - " + parecer.Edital.NumEdital + " - " + parecer.Edital.Cliente.Nome + " - " + parecer.Edital.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture), "NO GO");
+                EmailService.EnviarEmailNotificacaoSobreEdital("Equipe de Licitação", "licita@globalweb.com.br", parecer.Edital, "Assunto: Equipe de Licitação, Edital Definido como NO GO: ID " + parecer.Edital.Id + " - " + parecer.Edital.Cliente.Nome + " - " + parecer.Edital.Modalidade.Nome + " - " + parecer.Edital.NumEdital + " - " + parecer.Edital.Cliente.Nome + " - " + parecer.Edital.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture), "NO GO");*/
 
             return Ok();
         }

@@ -104,15 +104,15 @@ namespace Prs.Controllers
                 parecerGerente.EmpresaId,
                 parecerGerente.PreVendaId,
                 parecerGerente.ResponsavelRequestId,
-                parecerGerente.Anexo1 != null ? parecerGerente.Anexo1.Nome : null,
-                parecerGerente.Anexo1 != null ? parecerGerente.Anexo1.Tipo : null,
-                parecerGerente.Anexo1 != null ? parecerGerente.Anexo1.Base64 : null,
-                parecerGerente.Anexo2 != null ? parecerGerente.Anexo2.Nome : null,
-                parecerGerente.Anexo2 != null ? parecerGerente.Anexo2.Tipo : null,
-                parecerGerente.Anexo2 != null ? parecerGerente.Anexo2.Base64 : null);
+                parecerGerente.Anexo1?.Nome,
+                parecerGerente.Anexo1?.Tipo,
+                parecerGerente.Anexo1?.Base64,
+                parecerGerente.Anexo2?.Nome,
+                parecerGerente.Anexo2?.Tipo,
+                parecerGerente.Anexo2?.Base64);
 
-            EmailService.EnviarEmailNotificacaoSobreEdital(parecerGerenteNew.Edital.Diretor.Nome, parecerGerenteNew.Edital.Diretor.Email, parecerGerenteNew.Edital, "Assunto: Prezado Diretor " + parecerGerenteNew.Edital.Diretor.Nome + " favor emitir parecer para o Edital: ID " + parecerGerenteNew.Edital.Id + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.Modalidade.Nome + " - " + parecerGerenteNew.Edital.NumEdital + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));
-            EmailService.EnviarEmailNotificacaoSobreEdital("Equipe de Licitação", "licita@globalweb.com.br", parecerGerenteNew.Edital, "Assunto: Prezado Diretor " + parecerGerenteNew.Edital.Diretor.Nome + " favor emitir parecer para o Edital: ID " + parecerGerenteNew.Edital.Id + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.Modalidade.Nome + " - " + parecerGerenteNew.Edital.NumEdital + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));
+            /*EmailService.EnviarEmailNotificacaoSobreEdital(parecerGerenteNew.Edital.Diretor.Nome, parecerGerenteNew.Edital.Diretor.Email, parecerGerenteNew.Edital, "Assunto: Prezado Diretor " + parecerGerenteNew.Edital.Diretor.Nome + " favor emitir parecer para o Edital: ID " + parecerGerenteNew.Edital.Id + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.Modalidade.Nome + " - " + parecerGerenteNew.Edital.NumEdital + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));
+            EmailService.EnviarEmailNotificacaoSobreEdital("Equipe de Licitação", "licita@globalweb.com.br", parecerGerenteNew.Edital, "Assunto: Prezado Diretor " + parecerGerenteNew.Edital.Diretor.Nome + " favor emitir parecer para o Edital: ID " + parecerGerenteNew.Edital.Id + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.Modalidade.Nome + " - " + parecerGerenteNew.Edital.NumEdital + " - " + parecerGerenteNew.Edital.Cliente.Nome + " - " + parecerGerenteNew.Edital.DataHoraDeAbertura.ToString("dd/MM/yyyy - HH:mm", CultureInfo.CurrentCulture));*/
 
             return Ok();
         }

@@ -75,8 +75,8 @@ namespace WorkerService.Tarefas
                         edNotOkDiretor.Add(edital);
                 }
 
-                if (edNotOkGerente.Count > 0 || edNotOkDiretor.Count > 0)
-                    EmailService.EnviarEmailAlertaSla(user.Nome, user.Email, edNotOkGerente, edNotOkDiretor);
+                /*if (edNotOkGerente.Count > 0 || edNotOkDiretor.Count > 0)
+                    EmailService.EnviarEmailAlertaSla(user.Nome, user.Email, edNotOkGerente, edNotOkDiretor);*/
 
             }
         }
